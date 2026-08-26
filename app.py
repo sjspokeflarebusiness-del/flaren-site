@@ -208,7 +208,7 @@ def order():
             "description": data.get("description", "").strip(),
             "budget": budget,  # NEW: include budget
             "deadline": data.get("deadline", ""),
-            "reference_file": data.get("referenceFile", ""),
+            "reference_link": data.get("referenceLink", "").strip(),
             "additional_requirements": data.get("additionalRequirements", "").strip(),
             "status": "New",
         }
@@ -230,6 +230,7 @@ def order():
             <p><strong>Budget:</strong> {order_data["budget"] or "Not specified"}</p>
             <p><strong>Description:</strong><br>{order_data["description"].replace("\n", "<br>")}</p>
             <p><strong>Deadline:</strong> {order_data["deadline"] or "Not specified"}</p>
+            <p><strong>Reference Link:</strong> <a href="{{ order_data['reference_link'] }}" target="_blank">{{ order_data['reference_link'] or "None" }}</a></p>
             <p><strong>Additional Requirements:</strong><br>{order_data["additional_requirements"].replace("\n", "<br>") or "None"}</p>
             <p><strong>Status:</strong> {order_data["status"]}</p>
           </body>
