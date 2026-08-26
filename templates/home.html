@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <div class="hero-panel">
+      <h1>FLAREN</h1>
+      <p>
+        Premium creative services designed to make your brand look sharp, modern, and unforgettable.
+        Clean visuals. Strong identity. Professional results.
+      </p>
+      <div class="actions">
+        <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
+        <a href="{{ url_for('services') }}" class="btn btn-secondary">View Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What we do</h2>
+    <p class="section-text">
+      We create design work that feels premium, modern, and clear. From branding to social media and promotional visuals,
+      every project is built to look polished and trustworthy.
+    </p>
+  </div>
+</section>
+{% endblock %}

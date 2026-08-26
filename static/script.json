@@ -1,0 +1,20 @@
+{
+  "name": "FLAREN",
+  "version": "1.0.0",
+  "description": "Premium creative services – posters, wallpapers, invitations, websites, and more.",
+  "contact": {
+    "email": "sjspokeflarebusiness@gmail.com",
+    "phone": "8838969397"
+  },
+  "assets": {
+    "logo": "/static/images/logo.png",
+    "portfolio": [
+      "/static/images/portfolio-1.png",
+      "/static/images/portfolio-2.png",
+      "/static/images/portfolio-3.png",
+      "/static/images/portfolio-4.png",
+      "/static/images/portfolio-5.png",
+      "/static/images/portfolio-6.png"
+    ]
+  }
+}

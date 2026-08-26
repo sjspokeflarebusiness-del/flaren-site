@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>Admin Login</h1>
+      <p>Enter your credentials to access the dashboard.</p>
+    </div>
+    <div class="content">
+      {% if error %}
+        <div class="error-box" style="display:block;">{{ error }}</div>
+      {% endif %}
+      <form method="POST">
+        <div class="grid">
+          <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

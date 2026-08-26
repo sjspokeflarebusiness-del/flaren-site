@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — Services{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-text">
+      Explore our full range of digital design and development services. Each service is crafted to deliver professional results tailored to your needs.
+    </p>
+    <div class="services-map">
+      {% for service in services %}
+      <div class="service-card">
+        <div class="service-number">{{ loop.index }}</div>
+        <h3>{{ service }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

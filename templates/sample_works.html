@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — Sample Works{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Sample Works</h2>
+    <p class="section-text">
+      Explore our key design categories. This is the main showcase of what we create.
+    </p>
+
+    <div class="sample-works-grid">
+      {% for work in sample_works %}
+      <div class="sample-work-card">
+        <div class="sample-work-image">
+          <img src="{{ url_for('static', filename='images/' + work.image) }}" alt="{{ work.title }}">
+        </div>
+        <div class="sample-work-body">
+          <h3>{{ work.title }}</h3>
+          <p>{{ work.desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="actions" style="margin-top: 28px;">
+      <a href="{{ url_for('order') }}" class="btn btn-primary">Start Your Project</a>
+      <a href="{{ url_for('services') }}" class="btn btn-secondary">View All Services</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — Order{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Order Now</h2>
+    <p class="section-text">
+      Ready to start your project? Fill out the form below and we’ll get back to you shortly.
+    </p>
+    <form class="order-form" method="POST">
+      <div class="form-row">
+        <div class="field">
+          <label for="customerName">Full Name</label>
+          <input type="text" id="customerName" name="customerName" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Choose a service</option>
+            {% for service in services %}
+            <option value="{{ service }}">{{ service }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="description">Project Description</label>
+        <textarea id="description" name="description" required placeholder="Describe your project in detail..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="deadline">Deadline (Optional)</label>
+          <input type="date" id="deadline" name="deadline">
+        </div>
+        <div class="field">
+          <label for="referenceFile">Reference File (Optional)</label>
+          <input type="file" id="referenceFile" name="referenceFile">
+        </div>
+      </div>
+      <div class="field">
+        <label for="additionalRequirements">Additional Requirements (Optional)</label>
+        <textarea id="additionalRequirements" name="additionalRequirements" placeholder="Any specific colors, fonts, or other details?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Order</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

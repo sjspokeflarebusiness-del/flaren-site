@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>Admin Dashboard</h1>
+      <p>Orders overview</p>
+    </div>
+    <div class="content">
+      <p>Total Orders: {{ total_orders }} | New: {{ new_orders }} | Reviewing: {{ reviewing_orders }} | Accepted: {{ accepted_orders }} | In Progress: {{ progress_orders }} | Completed: {{ completed_orders }} | Cancelled: {{ cancelled_orders }}</p>
+      <div class="portfolio-grid">
+        {% for order in recent_orders %}
+          <div class="portfolio-card">
+            <div class="portfolio-body">
+              <h3>{{ order.order_id }}</h3>
+              <p>{{ order.customer_name }} | {{ order.service }} | {{ order.status }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="actions" style="margin-top:20px;">
+        <a class="btn btn-secondary" href="{{ url_for('admin_logout') }}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

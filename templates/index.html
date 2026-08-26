@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — Turn Your Ideas Into Digital Work{% endblock %}
+
+{% block content %}
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-panel">
+      <h1>FLAREN</h1>
+      <p>
+        Premium creative services designed to make your brand look sharp, modern, and unforgettable.
+        Clean visuals. Strong identity. Professional results.
+      </p>
+      <div class="actions">
+        <a href="#order" class="btn btn-primary">Order Now</a>
+        <a href="#services" class="btn btn-secondary">View Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-text">
+      Explore our full range of digital design and development services. Each service is crafted to deliver professional results tailored to your needs.
+    </p>
+    <div class="services-map">
+      {% for service in services %}
+      <div class="service-card">
+        <div class="service-number">{{ loop.index }}</div>
+        <h3>{{ service }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works" class="section">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-text">
+      Our process is simple, transparent, and designed to get you from idea to delivery with minimal friction.
+    </p>
+    <div class="steps-timeline">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Choose Service</h3>
+        <p>Select the service that best matches your project needs from our list.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Describe Your Idea</h3>
+        <p>Share details about your vision, including style, size, and any references.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Submit Order</h3>
+        <p>Fill out the order form with your requirements and contact information.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>We Review & Contact You</h3>
+        <p>We’ll reach out to confirm scope, pricing, and timeline before starting work.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <h3>Delivery & Completion</h3>
+        <p>Receive your finished project files, ready to use and share.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="order" class="section">
+  <div class="container">
+    <h2 class="section-title">Order Now</h2>
+    <p class="section-text">
+      Ready to start your project? Fill out the form below and we’ll get back to you shortly.
+    </p>
+    <form class="order-form" action="{{ url_for('submit_order') }}" method="POST">
+      <div class="form-row">
+        <div class="field">
+          <label for="customerName">Full Name</label>
+          <input type="text" id="customerName" name="customerName" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Choose a service</option>
+            {% for service in services %}
+            <option value="{{ service }}">{{ service }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="description">Project Description</label>
+        <textarea id="description" name="description" required placeholder="Describe your project in detail..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="deadline">Deadline (Optional)</label>
+          <input type="date" id="deadline" name="deadline">
+        </div>
+        <div class="field">
+          <label for="referenceFile">Reference File (Optional)</label>
+          <input type="file" id="referenceFile" name="referenceFile">
+        </div>
+      </div>
+      <div class="field">
+        <label for="additionalRequirements">Additional Requirements (Optional)</label>
+        <textarea id="additionalRequirements" name="additionalRequirements" placeholder="Any specific colors, fonts, or other details?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Order</button>
+    </form>
+
+    {% if request.args.get('order_id') %}
+    <div class="success-popup show">
+      <div class="success-icon">✓</div>
+      <h3>Order Received</h3>
+      <p>Thank you! Your order has been submitted successfully. Please check your email for confirmation.</p>
+      <div class="order-id-box">
+        <span class="order-id-label">Project ID:</span>
+        <span class="order-id-value">{{ request.args.get('order_id') }}</span>
+      </div>
+      <a href="#home" class="btn btn-secondary">Back to Home</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-text">
+      Have questions or need assistance? Reach out to us directly using the details below.
+    </p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-card">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FLAREN mini logo" class="contact-logo">
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="mailto:{{ owner_email }}" class="contact-value">{{ owner_email }}</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Phone / WhatsApp</span>
+              <a href="tel:+91{{ owner_phone }}" class="contact-value">{{ owner_phone }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <form class="contact-form">
+          <div class="field">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" required>
+          </div>
+          <div class="field">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" required>
+          </div>
+          <div class="field">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" required placeholder="Your message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Optional: Add any additional JS interactions here
+</script>
+{% endblock %}

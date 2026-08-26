@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}FLAREN Portfolio{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>Our Portfolio</h1>
+      <p>Selected sample work to help you understand the quality, style, and premium feel of FLAREN.</p>
+    </div>
+
+    <div class="content">
+      <div class="portfolio-intro">
+        <p>
+          We create clean, premium, and conversion-focused designs for brands that want to look professional and memorable.
+          Below are sample categories you can replace with your own real project screenshots.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-1.jpg') }}" alt="Brand Identity Design">
+          <div class="portfolio-body">
+            <h3>Brand Identity Design</h3>
+            <p>Modern logo concepts and brand visuals designed for a clean, premium first impression.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-2.jpg') }}" alt="Social Media Design">
+          <div class="portfolio-body">
+            <h3>Social Media Design</h3>
+            <p>Eye-catching promotional posts made to improve engagement and create a strong brand feel.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-3.jpg') }}" alt="Poster Design">
+          <div class="portfolio-body">
+            <h3>Poster / Flyer Design</h3>
+            <p>Clear, bold layouts for events, offers, campaigns, and business promotions.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-4.jpg') }}" alt="Website UI Mockup">
+          <div class="portfolio-body">
+            <h3>Website UI Mockup</h3>
+            <p>Simple and elegant interface design ideas for websites that need a polished online presence.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-5.jpg') }}" alt="Business Card Design">
+          <div class="portfolio-body">
+            <h3>Business Card Design</h3>
+            <p>Professional business card layouts that make contact details feel premium and memorable.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <img src="{{ url_for('static', filename='images/portfolio-6.jpg') }}" alt="Banner Design">
+          <div class="portfolio-body">
+            <h3>Banner / Ad Creative</h3>
+            <p>Focused marketing graphics designed for ads, launches, and online promotions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-note">
+        <h2>How to use this page</h2>
+        <p>
+          Replace the sample images in <strong>static/images/</strong> with your own work using the same file names:
+          <code>portfolio-1.jpg</code> to <code>portfolio-6.jpg</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
