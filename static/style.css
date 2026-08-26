@@ -717,3 +717,20 @@ a {
     grid-template-columns: 1fr;
   }
 }
+/* Budget field styling */
+.field input[type="number"] {
+  /* Ensure number inputs (like Budget) look consistent */
+  -moz-appearance: textfield;
+}
+
+.field input[type="number"]::-webkit-outer-spin-button,
+.field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Optional: subtle hint style for budget placeholder */
+.field input[type="number"]::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
