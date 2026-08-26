@@ -193,6 +193,10 @@ def order():
     if request.method == "POST":
         data = request.form
         order_id = generate_order_id()
+
+        # NEW: read budget field
+        budget = data.get("budget", "").strip()
+
         order_data = {
             "type": "order",
             "order_id": order_id,
@@ -202,6 +206,7 @@ def order():
             "phone": data.get("phone", "").strip(),
             "service": data.get("service", ""),
             "description": data.get("description", "").strip(),
+            "budget": budget,  # NEW: include budget
             "deadline": data.get("deadline", ""),
             "reference_file": data.get("referenceFile", ""),
             "additional_requirements": data.get("additionalRequirements", "").strip(),
@@ -222,6 +227,7 @@ def order():
             <p><strong>Email:</strong> {order_data["email"]}</p>
             <p><strong>Phone:</strong> {order_data["phone"]}</p>
             <p><strong>Service:</strong> {order_data["service"]}</p>
+            <p><strong>Budget:</strong> {order_data["budget"] or "Not specified"}</p>
             <p><strong>Description:</strong><br>{order_data["description"].replace("\n", "<br>")}</p>
             <p><strong>Deadline:</strong> {order_data["deadline"] or "Not specified"}</p>
             <p><strong>Additional Requirements:</strong><br>{order_data["additional_requirements"].replace("\n", "<br>") or "None"}</p>
@@ -241,6 +247,7 @@ def order():
             <p>Your order has been placed successfully.</p>
             <p><strong>Order ID:</strong> {order_id}</p>
             <p><strong>Service:</strong> {order_data["service"]}</p>
+            <p><strong>Budget:</strong> {order_data["budget"] or "Not specified"}</p>
             <p><strong>Description:</strong><br>{order_data["description"].replace("\n", "<br>")}</p>
             <p>We will contact you soon to confirm details.</p>
             <p><strong>Please check your email for further details.</strong></p>
