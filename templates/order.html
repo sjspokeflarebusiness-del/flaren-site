@@ -9,20 +9,12 @@
       Ready to start your project? Fill out the form below and we’ll get back to you shortly.
     </p>
     <form class="order-form" method="POST">
+      
+      <!-- Budget + Service -->
       <div class="form-row">
         <div class="field">
-          <label for="customerName">Full Name</label>
-          <input type="text" id="customerName" name="customerName" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label for="phone">Phone / WhatsApp</label>
-          <input type="tel" id="phone" name="phone" required>
+          <label for="budget">Budget (INR)</label>
+          <input type="number" id="budget" name="budget" min="0" placeholder="e.g. 2000">
         </div>
         <div class="field">
           <label for="service">Service</label>
@@ -34,10 +26,34 @@
           </select>
         </div>
       </div>
+
+      <!-- Name + Email -->
+      <div class="form-row">
+        <div class="field">
+          <label for="customerName">Full Name</label>
+          <input type="text" id="customerName" name="customerName" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <!-- Description -->
       <div class="field">
         <label for="description">Project Description</label>
         <textarea id="description" name="description" required placeholder="Describe your project in detail..."></textarea>
       </div>
+
+      <!-- Deadline + Reference File -->
       <div class="form-row">
         <div class="field">
           <label for="deadline">Deadline (Optional)</label>
@@ -48,10 +64,13 @@
           <input type="file" id="referenceFile" name="referenceFile">
         </div>
       </div>
+
+      <!-- Additional Requirements -->
       <div class="field">
         <label for="additionalRequirements">Additional Requirements (Optional)</label>
         <textarea id="additionalRequirements" name="additionalRequirements" placeholder="Any specific colors, fonts, or other details?"></textarea>
       </div>
+
       <button type="submit" class="btn btn-primary">Submit Order</button>
     </form>
   </div>
