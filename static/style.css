@@ -734,3 +734,14 @@ a {
   color: #9ca3af;
   font-style: italic;
 }
+/* Slightly stronger hero text on small screens */
+@media (max-width: 700px) {
+  .hero-panel p {
+    font-size: 15px;
+  }
+}
+
+/* Make sample work cards fully clickable */
+.sample-work-card {
+  display: block;
+}
