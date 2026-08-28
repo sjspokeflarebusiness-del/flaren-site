@@ -769,61 +769,99 @@ a {
   align-items: flex-start;
 }
 
-/* How It Works: vertical timeline */
+/* How It Works: animated vertical timeline */
 .process-timeline {
   position: relative;
   max-width: 800px;
   margin: 28px auto 0;
-  padding-left: 36px;
+  padding-left: 50px;
 }
 
+/* Animated line */
 .process-timeline::before {
   content: "";
   position: absolute;
-  top: 6px;
-  bottom: 0;
+  top: 20px;
+  bottom: 20px;
   left: 14px;
-  width: 2px;
+  width: 3px;
   background: linear-gradient(to bottom, var(--gold), var(--gold-soft));
-  border-radius: 2px;
+  border-radius: 3px;
+  animation: drawLine 1.6s ease-out forwards;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+@keyframes drawLine {
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .process-step {
   position: relative;
   margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeSlideStep 0.6s ease-out forwards;
+}
+
+/* Staggered animation for each step */
+.process-step:nth-child(1) { animation-delay: 0.2s; }
+.process-step:nth-child(2) { animation-delay: 0.35s; }
+.process-step:nth-child(3) { animation-delay: 0.5s; }
+.process-step:nth-child(4) { animation-delay: 0.65s; }
+.process-step:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes fadeSlideStep {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .process-step-marker {
   position: absolute;
-  left: -36px;
-  top: 0;
-  width: 30px;
-  height: 30px;
+  left: -50px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--gold);
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 16px rgba(200, 162, 74, 0.25);
+  box-shadow: 0 6px 16px rgba(200, 162, 74, 0.35);
+  z-index: 2;
 }
 
-.process-step-content {
+.process-step-box {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 18px 18px;
+  box-shadow: 0 8px 22px rgba(60, 45, 10, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.process-step-content h3 {
+.process-step-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(200, 162, 74, 0.18);
+}
+
+.process-step-box h3 {
   margin: 0 0 6px;
   font-size: 16px;
   color: #2d2411;
 }
 
-.process-step-content p {
+.process-step-box p {
   margin: 0;
   font-size: 14px;
   color: #475569;
@@ -833,7 +871,7 @@ a {
 /* Responsive tweaks */
 @media (max-width: 700px) {
   .process-timeline {
-    padding-left: 28px;
+    padding-left: 36px;
   }
 
   .process-timeline::before {
@@ -841,9 +879,13 @@ a {
   }
 
   .process-step-marker {
-    left: -28px;
-    width: 26px;
-    height: 26px;
-    font-size: 12px;
+    left: -36px;
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .process-step {
+    margin-bottom: 22px;
   }
 }
