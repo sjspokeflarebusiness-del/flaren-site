@@ -268,5 +268,13 @@ def order_success():
     order_id = request.args.get("order_id", "")
     return render_template("order_success.html", order_id=order_id)
 
+# NEW: Work detail page
+@app.route("/work/<slug>")
+def work_detail(slug):
+    work = next((w for w in SAMPLE_WORKS if w["key"] == slug), None)
+    if not work:
+        return "Not found", 404
+    return render_template("work_detail.html", work=work)
+
 if __name__ == "__main__":
     app.run(debug=True)
