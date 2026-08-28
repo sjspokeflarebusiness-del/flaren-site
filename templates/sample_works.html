@@ -2,16 +2,34 @@
 {% block title %}FLAREN — Sample Works{% endblock %}
 
 {% block content %}
-<section class="section">
+<!-- Hero -->
+<section class="hero">
   <div class="container">
-    <h2 class="section-title">Sample Works</h2>
+    <div class="hero-panel">
+      <h1>Sample Works</h1>
+      <p>
+        Professional digital design & simple web projects — made for you.  
+        Browse our recent work below, then tell us about your idea.
+      </p>
+      <div class="actions">
+        <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
+        <a href="#sample-works-grid" class="btn btn-secondary">See Our Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sample Works Grid -->
+<section class="section" id="sample-works-grid">
+  <div class="container">
+    <h2 class="section-title">Our Work</h2>
     <p class="section-text">
-      Explore our key design categories. This is the main showcase of what we create.
+      A selection of designs and projects we’ve created.
     </p>
 
     <div class="sample-works-grid">
       {% for work in sample_works %}
-      <div class="sample-work-card">
+      <a href="{{ url_for('work_detail', slug=work['key']) }}" class="sample-work-card">
         <div class="sample-work-image">
           <img src="{{ url_for('static', filename='images/' + work.image) }}" alt="{{ work.title }}">
         </div>
@@ -19,13 +37,41 @@
           <h3>{{ work.title }}</h3>
           <p>{{ work.desc }}</p>
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
+  </div>
+</section>
 
-    <div class="actions" style="margin-top: 28px;">
-      <a href="{{ url_for('order') }}" class="btn btn-primary">Start Your Project</a>
-      <a href="{{ url_for('services') }}" class="btn btn-secondary">View All Services</a>
+<!-- Testimonials -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What Clients Say</h2>
+    <p class="section-text">
+      Feedback from recent projects and collaborations.
+    </p>
+
+    <div class="sample-works-grid" style="margin-top: 22px;">
+      <div class="service-card">
+        <h3>“Clean, modern designs delivered on time.”</h3>
+        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+          — College event team, Poster design
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3>“Understood our idea and made it look professional.”</h3>
+        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+          — Startup founder, Logo & brand visuals
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3>“Very easy to work with and great suggestions.”</h3>
+        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+          — Teacher, School project design
+        </p>
+      </div>
     </div>
   </div>
 </section>
