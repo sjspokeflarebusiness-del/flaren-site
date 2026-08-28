@@ -2,56 +2,74 @@
 {% block title %}FLAREN — Contact{% endblock %}
 
 {% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-panel">
+      <h1>Contact Us</h1>
+      <p>
+        Have a question or a project in mind?  
+        Send us a message and we’ll get back to you soon.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Content -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">Contact Us</h2>
+    <h2 class="section-title">Get In Touch</h2>
     <p class="section-text">
-      Have questions or need assistance? Reach out to us directly using the details below.
+      You can reach us via the form below, or directly through email or phone.
     </p>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for category, message in messages %}
-            <div class="flash-message flash-{{ category }}">{{ message }}</div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
-
     <div class="contact-grid">
-      <div class="contact-info">
+      <!-- Contact Info -->
+      <div>
         <div class="contact-card">
-          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FLAREN mini logo" class="contact-logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FLAREN logo" class="contact-logo">
           <div class="contact-details">
             <div class="contact-item">
               <span class="contact-label">Email</span>
-              <a href="mailto:{{ owner_email }}" class="contact-value">{{ owner_email }}</a>
+              <div class="contact-value">{{ owner_email }}</div>
             </div>
             <div class="contact-item">
               <span class="contact-label">Phone / WhatsApp</span>
-              <a href="tel:+91{{ owner_phone }}" class="contact-value">{{ owner_phone }}</a>
+              <div class="contact-value">{{ owner_phone }}</div>
             </div>
           </div>
         </div>
+
+        <div class="contact-form-wrapper" style="margin-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #2d2411;">Why contact us?</h3>
+          <ul style="margin: 0; padding-left: 18px; color: #475569; line-height: 1.7;">
+            <li>Discuss a new design or website project</li>
+            <li>Ask about timelines, pricing, or process</li>
+            <li>Share feedback on ongoing work</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- Contact Form -->
       <div class="contact-form-wrapper">
         <form class="contact-form" method="POST">
           <div class="field">
-            <label for="contactName">Name</label>
+            <label for="contactName">Your Name</label>
             <input type="text" id="contactName" name="contactName" required>
           </div>
+
           <div class="field">
-            <label for="contactEmail">Email</label>
+            <label for="contactEmail">Your Email</label>
             <input type="email" id="contactEmail" name="contactEmail" required>
           </div>
+
           <div class="field">
-            <label for="contactMessage">Message</label>
-            <textarea id="contactMessage" name="contactMessage" required placeholder="Your message..."></textarea>
+            <label for="contactMessage">Your Message</label>
+            <textarea id="contactMessage" name="contactMessage" required placeholder="Tell us about your query or project..."></textarea>
           </div>
+
           <button type="submit" class="btn btn-primary">Send Message</button>
-          <p class="form-note">After sending, you’ll see a success message. Please check your email for further details.</p>
+          <p class="form-note">We usually reply within 24 hours.</p>
         </form>
       </div>
     </div>
