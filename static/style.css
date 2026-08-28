@@ -745,3 +745,22 @@ a {
 .sample-work-card {
   display: block;
 }
+/* Services page: slightly bigger hero text */
+.services-page .hero-panel h1 {
+  font-size: 40px;
+}
+
+/* Make service cards a bit more spacious */
+.service-card {
+  padding: 28px 22px;
+}
+
+.service-card h3 {
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+/* Steps timeline spacing */
+.steps-timeline {
+  margin-top: 30px;
+}
