@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}FLAREN — {{ work.title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">{{ work.title }}</h2>
+    <p class="section-text" style="margin-bottom: 22px;">
+      {{ work.desc }}
+    </p>
+
+    <div class="sample-work-card" style="max-width: 520px;">
+      <div class="sample-work-image" style="height: 260px;">
+        <img src="{{ url_for('static', filename='images/' + work.image) }}" alt="{{ work.title }}">
+      </div>
+      <div class="sample-work-body">
+        <p style="font-size: 14px; color: #6b7280;">
+          Want something similar? Tell us about your project.
+        </p>
+        <div class="actions" style="margin-top: 14px;">
+          <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
+          <a href="{{ url_for('sample_works') }}" class="btn btn-secondary">Back to All Work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
