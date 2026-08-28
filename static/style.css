@@ -764,3 +764,86 @@ a {
 .steps-timeline {
   margin-top: 30px;
 }
+/* Contact page: extra spacing */
+.contact-grid {
+  align-items: flex-start;
+}
+
+/* How It Works: vertical timeline */
+.process-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 28px auto 0;
+  padding-left: 36px;
+}
+
+.process-timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  left: 14px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-soft));
+  border-radius: 2px;
+}
+
+.process-step {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.process-step-marker {
+  position: absolute;
+  left: -36px;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(200, 162, 74, 0.25);
+}
+
+.process-step-content {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 18px;
+}
+
+.process-step-content h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #2d2411;
+}
+
+.process-step-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .process-timeline {
+    padding-left: 28px;
+  }
+
+  .process-timeline::before {
+    left: 8px;
+  }
+
+  .process-step-marker {
+    left: -28px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+}
