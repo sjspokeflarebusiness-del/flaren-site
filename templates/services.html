@@ -2,19 +2,78 @@
 {% block title %}FLAREN — Services{% endblock %}
 
 {% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-panel">
+      <h1>Our Services</h1>
+      <p>
+        From posters and logos to simple websites and custom digital work —  
+        we help you turn ideas into clean, professional designs.
+      </p>
+      <div class="actions">
+        <a href="{{ url_for('order') }}" class="btn btn-primary">Start a Project</a>
+        <a href="{{ url_for('sample_works') }}" class="btn btn-secondary">See Sample Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services List -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">Our Services</h2>
+    <h2 class="section-title">What We Offer</h2>
     <p class="section-text">
-      Explore our full range of digital design and development services. Each service is crafted to deliver professional results tailored to your needs.
+      Browse our core services below. If you need something custom, just tell us in the order form.
     </p>
+
     <div class="services-map">
       {% for service in services %}
       <div class="service-card">
-        <div class="service-number">{{ loop.index }}</div>
+        <span class="service-number">{{ loop.index }}</span>
         <h3>{{ service }}</h3>
       </div>
       {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- How It Works (mini timeline) -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">How We Work</h2>
+    <p class="section-text">
+      Simple, clear steps from idea to final design.
+    </p>
+
+    <div class="steps-timeline">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>You share your idea</h3>
+        <p>Tell us about your project, goals, and any references.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>We plan & confirm</h3>
+        <p>We suggest approach, timeline, and budget, and confirm details.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Design & revisions</h3>
+        <p>We create the design and share drafts for your feedback.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Final delivery</h3>
+        <p>You get final files ready to use online or in print.</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 26px;">
+      <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
     </div>
   </div>
 </section>
