@@ -889,3 +889,247 @@ a {
     margin-bottom: 22px;
   }
 }
+/* =========================================
+   FLAREN WORK AND PROCESS PAGE ANIMATIONS
+   ========================================= */
+
+.hero-logo {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+  display: block;
+  margin: 0 0 18px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(45, 36, 17, 0.18);
+  animation: flarenLogoEnter 0.8s ease-out both;
+}
+
+.hero-panel h1 {
+  animation: flarenTitleEnter 0.75s ease-out 0.15s both;
+}
+
+.hero-panel p {
+  animation: flarenTextEnter 0.75s ease-out 0.3s both;
+}
+
+.hero-panel .actions {
+  animation: flarenTextEnter 0.75s ease-out 0.45s both;
+}
+
+@keyframes flarenLogoEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.88) rotate(-5deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes flarenTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes flarenTextEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Work cards */
+
+.sample-work-card {
+  position: relative;
+  isolation: isolate;
+  animation: workCardEnter 0.65s ease-out both;
+}
+
+.sample-work-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.sample-work-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.sample-work-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.sample-work-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.sample-work-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.sample-work-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.sample-work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sample-work-card:hover::after {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(200, 162, 74, 0.10);
+}
+
+.sample-work-card:hover .sample-work-image img {
+  transform: scale(1.06);
+}
+
+.sample-work-image img {
+  transition: transform 0.45s ease;
+}
+
+@keyframes workCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Process timeline */
+
+.process-timeline {
+  animation: processTimelineEnter 0.8s ease-out both;
+}
+
+.process-step-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.process-step-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
+  transition: left 0.55s ease;
+}
+
+.process-step-box:hover::before {
+  left: 115%;
+}
+
+.process-step-marker {
+  animation: markerPulse 2.2s ease-in-out infinite;
+}
+
+.process-step:nth-child(1) {
+  animation-delay: 0.15s;
+}
+
+.process-step:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.process-step:nth-child(3) {
+  animation-delay: 0.45s;
+}
+
+.process-step:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.process-step:nth-child(5) {
+  animation-delay: 0.75s;
+}
+
+@keyframes processTimelineEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes markerPulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 16px rgba(200, 162, 74, 0.28);
+  }
+
+  50% {
+    box-shadow: 0 6px 24px rgba(200, 162, 74, 0.58);
+  }
+}
+
+
+/* Flash messages */
+
+.flash-message {
+  animation: flashMessageEnter 0.45s ease-out both;
+}
+
+@keyframes flashMessageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Accessibility: respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
