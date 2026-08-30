@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}FLAREN — Our Work{% endblock %}
+{% block title %}FLAREN — Find the Right Design{% endblock %}
 
 {% block content %}
-<section class="hero">
+
+<section class="hero planner-hero">
   <div class="container">
     <div class="hero-panel">
       <img
@@ -12,110 +13,193 @@
         class="hero-logo"
       >
 
-      <h1>Our Work</h1>
+      <h1>Find the right design solution</h1>
 
       <p>
-        Explore selected FLAREN projects, from logos and posters to digital
-        artwork, cards, presentations, and other creative work.
+        Not sure which FLAREN service fits your idea? Answer three quick
+        questions and get a practical recommendation before placing your order.
       </p>
 
       <div class="actions">
-        <a href="/order" class="btn btn-primary">Start a Project</a>
-        <a href="/services" class="btn btn-secondary">View Services</a>
+        <a href="#project-planner" class="btn btn-primary">
+          Find My Service
+        </a>
+
+        <a href="/services" class="btn btn-secondary">
+          View All Services
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Selected Work</h2>
+<section
+  class="section"
+  id="project-planner"
+>
+  <div class="container planner-container">
+
+    <h2 class="section-title">FLAREN Project Planner</h2>
 
     <p class="section-text">
-      Browse our main design categories. Select a category to view more details.
+      Tell us what you are trying to create. We will suggest the most suitable
+      service and explain what information to prepare.
     </p>
 
-    <div class="sample-works-grid">
+    <form
+      class="planner-form"
+      method="POST"
+      action="{{ url_for('work') }}"
+    >
 
-      <a href="/work/logo" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Logo design"
-          >
-        </div>
-        <div class="sample-work-body">
-          <h3>Logo Design</h3>
-          <p>Clean logo and branding visuals for personal brands and businesses.</p>
-        </div>
-      </a>
+      <div class="field">
+        <label for="goal">What are you creating?</label>
 
-      <a href="/work/advertisement_posters" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Advertisement posters"
-          >
-        </div>
-        <div class="sample-work-body">
-          <h3>Advertisement Posters</h3>
-          <p>Promotional posters designed for events, products, and brands.</p>
-        </div>
-      </a>
+        <select
+          id="goal"
+          name="goal"
+          required
+        >
+          <option value="" disabled selected>
+            Select your project type
+          </option>
+          <option value="event">An event or celebration</option>
+          <option value="business">A business or brand project</option>
+          <option value="school">A school or college project</option>
+          <option value="personal">A personal creative project</option>
+          <option value="website">A simple website</option>
+        </select>
+      </div>
 
-      <a href="/work/digital_images" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Digital images"
-          >
-        </div>
-        <div class="sample-work-body">
-          <h3>Digital Images</h3>
-          <p>Digital art, banners, social media graphics, and visual content.</p>
-        </div>
-      </a>
+      <div class="field">
+        <label for="audience">Who is it for?</label>
 
-      <a href="/work/card_designs" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Card designs"
-          >
-        </div>
-        <div class="sample-work-body">
-          <h3>Card Designs</h3>
-          <p>Business cards, greeting cards, invitations, and printable designs.</p>
-        </div>
-      </a>
+        <select
+          id="audience"
+          name="audience"
+          required
+        >
+          <option value="" disabled selected>
+            Select your audience
+          </option>
+          <option value="myself">Myself</option>
+          <option value="students">Students or teachers</option>
+          <option value="customers">Customers or clients</option>
+          <option value="friends-family">Friends or family</option>
+          <option value="public">The general public</option>
+        </select>
+      </div>
 
-      <a href="/work/awesome_posters" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Creative posters"
-          >
-        </div>
-        <div class="sample-work-body">
-          <h3>Awesome Posters</h3>
-          <p>Bold and creative poster designs for different themes and purposes.</p>
-        </div>
-      </a>
+      <div class="field">
+        <label for="deadline">When do you need it?</label>
 
-      <a href="/work/personal_portfolio" class="sample-work-card">
-        <div class="sample-work-image">
-          <img
-            src="{{ url_for('static', filename='images/flaren.png') }}"
-            alt="Personal image portfolio"
-          >
+        <select
+          id="deadline"
+          name="deadline"
+          required
+        >
+          <option value="" disabled selected>
+            Select a timeframe
+          </option>
+          <option value="urgent">As soon as possible</option>
+          <option value="one-week">Within one week</option>
+          <option value="two-weeks">Within two weeks</option>
+          <option value="flexible">I am flexible</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary planner-submit"
+      >
+        Show My Recommendation
+      </button>
+
+    </form>
+
+    {% if recommendation %}
+    <div class="recommendation-card">
+
+      <div class="recommendation-badge">
+        Recommended for you
+      </div>
+
+      <h2>{{ recommendation.service }}</h2>
+
+      <p>
+        {{ recommendation.reason }}
+      </p>
+
+      <div class="recommendation-details">
+        <div>
+          <span>Audience</span>
+          <strong>{{ recommendation.audience }}</strong>
         </div>
-        <div class="sample-work-body">
-          <h3>Personal Image Portfolio</h3>
-          <p>Curated photography, portraits, and personal visual projects.</p>
+
+        <div>
+          <span>Timeframe</span>
+          <strong>{{ recommendation.deadline }}</strong>
         </div>
-      </a>
+      </div>
+
+      <div class="recommendation-next">
+        <strong>What to prepare:</strong>
+        <p>{{ recommendation.next_step }}</p>
+      </div>
+
+      <div class="actions">
+        <a href="/order" class="btn btn-primary">
+          Start This Project
+        </a>
+
+        <a href="/contact" class="btn btn-secondary">
+          Ask a Question
+        </a>
+      </div>
 
     </div>
+    {% endif %}
+
   </div>
 </section>
+
+<section class="section planner-benefits-section">
+  <div class="container">
+
+    <h2 class="section-title">Why use the planner?</h2>
+
+    <div class="services-map">
+
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3>No confusing service list</h3>
+        <p>
+          Start with your goal instead of trying to understand every design
+          category.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3>Better project conversations</h3>
+        <p>
+          Arrive with a clearer idea of what you need and what information to
+          share.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3>Built for real people</h3>
+        <p>
+          The planner works for students, creators, families, and small
+          businesses.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
 {% endblock %}
