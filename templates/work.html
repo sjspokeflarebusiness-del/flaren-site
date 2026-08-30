@@ -48,6 +48,7 @@
 
     <form
       class="planner-form"
+      id="plannerForm"
       method="POST"
       action="{{ url_for('work') }}"
     >
@@ -117,51 +118,71 @@
 
     </form>
 
-    {% if recommendation %}
-    <div class="recommendation-card">
-
-      <div class="recommendation-badge">
-        Recommended for you
-      </div>
-
-      <h2>{{ recommendation.service }}</h2>
-
-      <p>
-        {{ recommendation.reason }}
-      </p>
-
-      <div class="recommendation-details">
-        <div>
-          <span>Audience</span>
-          <strong>{{ recommendation.audience }}</strong>
-        </div>
-
-        <div>
-          <span>Timeframe</span>
-          <strong>{{ recommendation.deadline }}</strong>
-        </div>
-      </div>
-
-      <div class="recommendation-next">
-        <strong>What to prepare:</strong>
-        <p>{{ recommendation.next_step }}</p>
-      </div>
-
-      <div class="actions">
-        <a href="/order" class="btn btn-primary">
-          Start This Project
-        </a>
-
-        <a href="/contact" class="btn btn-secondary">
-          Ask a Question
-        </a>
-      </div>
-
-    </div>
-    {% endif %}
-
   </div>
 </section>
+
+{% if recommendation %}
+<div class="recommendation-overlay" id="recommendationOverlay">
+  <div class="recommendation-popup">
+    <button
+      class="recommendation-close"
+      id="recommendationClose"
+      type="button"
+      aria-label="Close recommendation"
+    >
+      ✕
+    </button>
+
+    <div class="recommendation-arrow recommendation-arrow-top"></div>
+    <div class="recommendation-arrow recommendation-arrow-bottom"></div>
+
+    <div class="recommendation-badge">
+      Recommended for you
+    </div>
+
+    <h2>{{ recommendation.service }}</h2>
+
+    <p>
+      {{ recommendation.reason }}
+    </p>
+
+    <div class="recommendation-details">
+      <div>
+        <span>Audience</span>
+        <strong>{{ recommendation.audience }}</strong>
+      </div>
+
+      <div>
+        <span>Timeframe</span>
+        <strong>{{ recommendation.deadline }}</strong>
+      </div>
+    </div>
+
+    <div class="recommendation-next">
+      <strong>What to prepare:</strong>
+      <p>{{ recommendation.next_step }}</p>
+    </div>
+
+    <div class="actions">
+      <a href="/order" class="btn btn-primary">
+        Start This Project
+      </a>
+
+      <a href="/contact" class="btn btn-secondary">
+        Ask a Question
+      </a>
+
+      <button
+        class="btn btn-secondary"
+        id="recommendationBack"
+        type="button"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 <section class="section planner-benefits-section">
   <div class="container">
@@ -201,5 +222,44 @@
 
   </div>
 </section>
+
+<script>
+  const overlay = document.getElementById("recommendationOverlay");
+  const closeBtn = document.getElementById("recommendationClose");
+  const backBtn = document.getElementById("recommendationBack");
+  const form = document.getElementById("plannerForm");
+
+  function hideRecommendation() {
+    if (!overlay) return;
+    overlay.classList.remove("show");
+    // Optional: remove from DOM after animation
+    setTimeout(() => {
+      if (overlay) overlay.style.display = "none";
+    }, 400);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", hideRecommendation);
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      hideRecommendation();
+      if (form) {
+        form.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+
+  // Auto-show on load if recommendation exists (server-side rendered)
+  if (overlay) {
+    // Ensure it's visible in DOM
+    overlay.style.display = "flex";
+    // Trigger animation
+    requestAnimationFrame(() => {
+      overlay.classList.add("show");
+    });
+  }
+</script>
 
 {% endblock %}
