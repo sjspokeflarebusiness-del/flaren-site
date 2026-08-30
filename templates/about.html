@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}FLAREN — About{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-panel">
+      <img
+        src="{{ url_for('static', filename='images/logo.png') }}"
+        alt="FLAREN logo"
+        class="hero-logo"
+      >
+
+      <h1>About FLAREN</h1>
+
+      <p>
+        FLAREN creates clean, professional digital designs and simple web
+        projects for students, creators, individuals, and growing businesses.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <h2 class="section-title">Design made clear</h2>
+
+    <p class="section-text">
+      We turn ideas into useful, polished, and easy-to-understand digital work.
+      Whether you need a poster, invitation, presentation, school project,
+      website, or custom digital design, we focus on clarity and quality.
+    </p>
+
+    <div class="services-map about-values-grid">
+
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3>Clear communication</h3>
+        <p>
+          We ask the right questions before starting so your requirements are
+          understood properly.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3>Practical design</h3>
+        <p>
+          We create work that is not only attractive but also ready to use,
+          share, print, or publish.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3>Personal attention</h3>
+        <p>
+          Each project is handled with care instead of being treated like a
+          generic template.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3>Simple process</h3>
+        <p>
+          From the first idea to final delivery, we keep the process organized
+          and easy to follow.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="actions about-actions">
+      <a href="/order" class="btn btn-primary">Start a Project</a>
+      <a href="/contact" class="btn btn-secondary">Contact FLAREN</a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
