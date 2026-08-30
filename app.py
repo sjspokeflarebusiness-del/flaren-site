@@ -24,7 +24,7 @@ OWNER_PHONE = "8838969397"
 
 APPS_SCRIPT_WEBHOOK_URL = os.getenv(
     "APPS_SCRIPT_WEBHOOK_URL",
-    "https://script.google.com/macros/s/AKfycbzu3DUX5GsVlGNz5ts01dkZ6Vq7B9Wozr4BcP2iSr7mbF5vbCac27niA9_w66P3S7fOOw/exec",
+    "https://script.google.com/macros/s/AKfycbyHJBdGgYcIzCy9S0uzTuxl4kybB1f_3RgJJrIkh7UYvLz-yzJAPBsVuxOljAj0hadldQ/exec",
 )
 
 SMTP_SERVER = os.getenv("SMTP_SERVER", "")
