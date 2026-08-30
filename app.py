@@ -117,12 +117,10 @@ SAMPLE_WORKS = [
 # ============================================================
 
 def clean(value):
-    """Return a trimmed string for a form or webhook value."""
     return (value or "").strip()
 
 
 def html_text(value):
-    """Escape text before placing it inside an HTML email."""
     return escape(clean(value)).replace("\n", "<br>")
 
 
@@ -149,9 +147,6 @@ def generate_contact_id():
 
 
 def send_to_sheets(payload):
-    """
-    Send order/contact data to the deployed Google Apps Script web app.
-    """
     if not APPS_SCRIPT_WEBHOOK_URL:
         app.logger.warning("APPS_SCRIPT_WEBHOOK_URL is empty.")
         return False
@@ -195,12 +190,6 @@ def send_to_sheets(payload):
 
 
 def send_email(recipient_email, subject, body_html):
-    """
-    Send an HTML email using SMTP.
-
-    SMTP environment variables must be configured in Render:
-    SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM
-    """
     if not SMTP_SERVER or not SMTP_USER or not SMTP_PASS:
         app.logger.warning(
             "SMTP is not configured. Email was not sent."
