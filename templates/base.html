@@ -3,72 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>{% block title %}FLAREN — Design Studio{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+  >
+
   {% block extra_head %}{% endblock %}
 </head>
+
 <body>
 
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="/" class="brand">FLAREN</a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/work">Work</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/process">Process</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <!-- Optional AI Helper link in nav -->
-        <!-- <li><a href="/ai-helper">AI Helper</a></li> -->
-      </ul>
-    </div>
-  </nav>
+  <div class="site-shell">
 
-  <!-- MAIN CONTENT -->
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-inner">
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>FLAREN</h3>
-          <p>Design studio for posters, wallpapers, invitations, presentations, school projects, simple websites, and more.</p>
-        </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/process">Process</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <!-- Optional AI Helper link -->
-            <!-- <li><a href="/ai-helper">AI Helper</a></li> -->
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li>Email: your-email@example.com</li>
-            <li>WhatsApp: +91-XXXXXXXXXX</li>
-          </ul>
-        </div>
+        <a href="/" class="brand">
+          <img
+            src="{{ url_for('static', filename='images/flaren.png') }}"
+            alt="FLAREN logo"
+            class="brand-logo"
+          >
+
+          <span class="brand-text">FLAREN</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <nav class="site-nav">
+          <a href="/">Home</a>
+          <a href="/work">Work</a>
+          <a href="/services">Services</a>
+          <a href="/process">Process</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/order" class="nav-cta">Order Now</a>
+        </nav>
+
       </div>
-      <div class="footer-bottom">
-        <p>&copy; {{ now.year if now else '2026' }} FLAREN. All rights reserved.</p>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-main">
+
+      {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+
+        <p>
+          <strong>FLAREN</strong>
+          — Professional digital design and simple web projects.
+        </p>
+
+        <p>
+          <a href="/">Home</a>
+          ·
+          <a href="/work">Work</a>
+          ·
+          <a href="/services">Services</a>
+          ·
+          <a href="/process">Process</a>
+          ·
+          <a href="/about">About</a>
+          ·
+          <a href="/contact">Contact</a>
+        </p>
+
+        <p>
+          © 2026 FLAREN. All rights reserved.
+        </p>
+
       </div>
-    </div>
-  </footer>
+    </footer>
+
+  </div>
 
   {% block scripts %}{% endblock %}
 
-  <!-- MINDPAL FLOATING CHATBOT (FIXED BOTTOM-RIGHT) -->
+  <!-- MOBILE NAVIGATION SCRIPT -->
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+
+    if (navToggle && siteNav) {
+      navToggle.addEventListener("click", function () {
+        const isOpen = siteNav.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
+  </script>
+
+  <!-- MINDPAL FLOATING CHATBOT -->
   <script>
     window.mindpalConfig = {
       chatbotId: "flaren-design-studio-assistant-efe",
@@ -82,6 +122,7 @@
       }
     };
   </script>
+
   <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
 
 </body>
