@@ -14,6 +14,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    send_from_directory,
     url_for,
 )
 
@@ -69,45 +70,94 @@ SERVICES = [
 SAMPLE_WORKS = [
     {
         "key": "logo",
-        "title": "Logo Design",
-        "desc": "Our own FLAREN logo and branding visuals.",
+        "title": "FLAREN Logo Design",
+        "desc": "A bold visual identity created for the FLAREN brand.",
         "image": "logo.png",
+        "price": "₹499",
+        "category": "Branding",
+        "delivery": "1–2 days",
+        "details": (
+            "A clean logo concept designed to make a brand look memorable "
+            "and professional."
+        ),
     },
     {
         "key": "personal_portfolio",
-        "title": "Personal Image Portfolio",
-        "desc": "Curated personal photography and portrait work.",
+        "title": "Personal Portfolio Design",
+        "desc": "A polished visual portfolio for personal creative work.",
         "image": "portfolio-1.png",
+        "price": "₹499",
+        "category": "Portfolio Design",
+        "delivery": "1–2 days",
+        "details": (
+            "A simple and attractive portfolio layout for showcasing "
+            "photography, creative work, or personal projects."
+        ),
     },
     {
         "key": "advertisement_posters",
-        "title": "Advertisement Posters",
-        "desc": "Promotional posters for events and brands.",
+        "title": "Advertisement Poster",
+        "desc": "A promotional poster designed for events and small businesses.",
         "image": "portfolio-2.png",
+        "price": "₹399",
+        "category": "Poster Design",
+        "delivery": "1–2 days",
+        "details": (
+            "A clear promotional design suitable for social media, "
+            "WhatsApp sharing, printing, or local advertising."
+        ),
     },
     {
         "key": "digital_images",
-        "title": "Digital Images",
-        "desc": "Digital art, social media graphics, and banners.",
+        "title": "Digital Social Media Design",
+        "desc": "Digital artwork, banners, and social media graphics.",
         "image": "portfolio-3.png",
+        "price": "₹299",
+        "category": "Digital Design",
+        "delivery": "1–2 days",
+        "details": (
+            "A custom digital image created for online promotion, "
+            "social media, announcements, or personal use."
+        ),
     },
     {
         "key": "card_designs",
-        "title": "Card Designs",
-        "desc": "Business cards, greeting cards, and invitation cards.",
+        "title": "Website Design",
+        "desc": "A simple website concept for a personal brand or small business.",
         "image": "portfolio-4.png",
+        "price": "₹4,999",
+        "category": "Website Design",
+        "delivery": "3–5 days",
+        "details": (
+            "A simple responsive website with useful sections, contact "
+            "information, and a clear call to action."
+        ),
     },
     {
         "key": "awesome_posters",
-        "title": "Awesome Posters",
-        "desc": "Bold, creative poster designs for various themes.",
+        "title": "Card Design Collection",
+        "desc": "Business cards, greeting cards, and invitation card designs.",
         "image": "portfolio-5.png",
+        "price": "₹399",
+        "category": "Card Design",
+        "delivery": "1–2 days",
+        "details": (
+            "Custom card designs suitable for business cards, greetings, "
+            "celebrations, invitations, and sharing online."
+        ),
     },
     {
         "key": "extra_work",
-        "title": "Featured Works",
-        "desc": "Selected highlights from recent projects.",
+        "title": "Featured Creative Work",
+        "desc": "A selection of custom digital work from different project types.",
         "image": "portfolio-6.png",
+        "price": "₹499",
+        "category": "Custom Design",
+        "delivery": "1–3 days",
+        "details": (
+            "Flexible digital work created according to the client’s "
+            "specific idea, style, and requirements."
+        ),
     },
 ]
 
@@ -117,10 +167,12 @@ SAMPLE_WORKS = [
 # ============================================================
 
 def clean(value):
+    """Return a trimmed string."""
     return (value or "").strip()
 
 
 def html_text(value):
+    """Escape text before placing it inside an HTML email."""
     return escape(clean(value)).replace("\n", "<br>")
 
 
@@ -147,6 +199,7 @@ def generate_contact_id():
 
 
 def send_to_sheets(payload):
+    """Send order/contact data to Google Apps Script."""
     if not APPS_SCRIPT_WEBHOOK_URL:
         app.logger.warning("APPS_SCRIPT_WEBHOOK_URL is empty.")
         return False
@@ -190,6 +243,7 @@ def send_to_sheets(payload):
 
 
 def send_email(recipient_email, subject, body_html):
+    """Send an HTML email using SMTP."""
     if not SMTP_SERVER or not SMTP_USER or not SMTP_PASS:
         app.logger.warning(
             "SMTP is not configured. Email was not sent."
@@ -219,6 +273,19 @@ def send_email(recipient_email, subject, body_html):
     except (smtplib.SMTPException, OSError) as error:
         app.logger.error("SMTP email failed: %s", error)
         return False
+
+
+# ============================================================
+# FAVICON
+# ============================================================
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, "static"),
+        "favicon.ico",
+        mimetype="image/vnd.microsoft.icon",
+    )
 
 
 # ============================================================
@@ -363,7 +430,7 @@ def work():
                     "and deadline."
                 ),
             },
-        )
+        ).copy()
 
         recommendation["goal"] = goal
         recommendation["audience"] = audience
@@ -505,33 +572,15 @@ def order():
             "type": "order",
             "order_id": order_id,
             "date": datetime.now().isoformat(),
-            "customer_name": clean(
-                data.get("customerName")
-            ),
-            "email": clean(
-                data.get("email")
-            ),
-            "phone": clean(
-                data.get("phone")
-            ),
-            "service": clean(
-                data.get("service")
-            ),
-            "budget": clean(
-                data.get("budget")
-            ),
-            "description": clean(
-                data.get("description")
-            ),
-            "deadline": clean(
-                data.get("deadline")
-            ),
-            "reference_link": clean(
-                data.get("referenceLink")
-            ),
-            "reference_file": clean(
-                data.get("referenceFile")
-            ),
+            "customer_name": clean(data.get("customerName")),
+            "email": clean(data.get("email")),
+            "phone": clean(data.get("phone")),
+            "service": clean(data.get("service")),
+            "budget": clean(data.get("budget")),
+            "description": clean(data.get("description")),
+            "deadline": clean(data.get("deadline")),
+            "reference_link": clean(data.get("referenceLink")),
+            "reference_file": clean(data.get("referenceFile")),
             "additional_requirements": clean(
                 data.get("additionalRequirements")
             ),
@@ -559,9 +608,7 @@ def order():
 
         sheets_sent = send_to_sheets(order_data)
 
-        owner_subject = (
-            f"FLAREN — New Order: {order_id}"
-        )
+        owner_subject = f"FLAREN — New Order: {order_id}"
 
         owner_body_html = f"""
         <html>
@@ -693,11 +740,7 @@ def order():
                 customer_body_html,
             )
 
-        if (
-            sheets_sent
-            or owner_email_sent
-            or customer_email_sent
-        ):
+        if sheets_sent or owner_email_sent or customer_email_sent:
             flash(
                 "Order placed successfully. "
                 "Please check your email for details.",
@@ -725,9 +768,7 @@ def order():
 
 @app.route("/order-success")
 def order_success():
-    order_id = clean(
-        request.args.get("order_id")
-    )
+    order_id = clean(request.args.get("order_id"))
 
     return render_template(
         "order_success.html",
@@ -783,9 +824,7 @@ def internal_server_error(error):
 # ============================================================
 
 if __name__ == "__main__":
-    port = int(
-        os.getenv("PORT", "5000")
-    )
+    port = int(os.getenv("PORT", "5000"))
 
     app.run(
         host="0.0.0.0",
