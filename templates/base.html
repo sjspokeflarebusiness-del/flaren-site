@@ -91,6 +91,44 @@
       </a>
     </div>
   </footer>
+<!-- FLAREN AI Assistant (MindPal) -->
+<style>
+  /* Make sure the chatbot stays on top but not obtrusive */
+  #mindpal-widget,
+  [id*="mindpal"],
+  .mindpal-widget {
+    z-index: 9999 !important;
+  }
 
+  /* Optional: adjust position slightly if needed */
+  /* This targets the floating container; selector may vary slightly */
+  .mindpal-floating-root {
+    right: 18px !important;
+    bottom: 18px !important;
+  }
+
+  /* If you want it to appear a bit higher on mobile */
+  @media (max-width: 768px) {
+    .mindpal-floating-root {
+      right: 12px !important;
+      bottom: 12px !important;
+    }
+  }
+</style>
+
+<script>
+  window.mindpalConfig = {
+    chatbotId: "flaren-design-studio-assistant-efe",
+    display: {
+      type: "floating-corner",
+      anchor: "right"
+    },
+    behavior: {
+      showInitialMessageBubbleWhenMinimized: true,
+      minimizedByDefault: true
+    }
+  };
+</script>
+<script src="https://chatbot.getmindpal.com/embed.min.js"></script>
 </body>
 </html>
