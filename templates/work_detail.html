@@ -1,28 +1,84 @@
 {% extends "base.html" %}
-{% block title %}FLAREN — {{ work.title }}{% endblock %}
+
+{% block title %}
+FLAREN — {{ work.title }}
+{% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">{{ work.title }}</h2>
-    <p class="section-text" style="margin-bottom: 22px;">
-      {{ work.desc }}
-    </p>
 
-    <div class="sample-work-card" style="max-width: 520px;">
-      <div class="sample-work-image" style="height: 260px;">
-        <img src="{{ url_for('static', filename='images/' + work.image) }}" alt="{{ work.title }}">
+<section class="section work-detail-section">
+  <div class="container">
+
+    <a
+      href="{{ url_for('home') }}"
+      class="back-link"
+    >
+      ← Back to sample works
+    </a>
+
+    <div class="work-detail-card">
+
+      <div class="work-detail-image">
+        <img
+          src="{{ url_for('static', filename='images/' + work.image) }}"
+          alt="{{ work.title }}"
+        >
       </div>
-      <div class="sample-work-body">
-        <p style="font-size: 14px; color: #6b7280;">
-          Want something similar? Tell us about your project.
+
+      <div class="work-detail-content">
+
+        <p class="section-kicker">
+          {{ work.category }}
         </p>
-        <div class="actions" style="margin-top: 14px;">
-          <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
-          <a href="{{ url_for('sample_works') }}" class="btn btn-secondary">Back to All Work</a>
+
+        <h1>{{ work.title }}</h1>
+
+        <p class="work-detail-description">
+          {{ work.desc }}
+        </p>
+
+        <p class="work-detail-details">
+          {{ work.details }}
+        </p>
+
+        <div class="work-detail-facts">
+          <div>
+            <span>Starting price</span>
+            <strong>{{ work.price }}</strong>
+          </div>
+
+          <div>
+            <span>Typical delivery</span>
+            <strong>{{ work.delivery }}</strong>
+          </div>
         </div>
+
+        <div class="work-detail-note">
+          <strong>Note:</strong>
+          Final pricing depends on the exact content, size, number of pages,
+          revisions, and delivery requirements.
+        </div>
+
+        <div class="actions work-detail-actions">
+          <a
+            href="{{ url_for('order') }}"
+            class="btn btn-primary"
+          >
+            Order This Service
+          </a>
+
+          <a
+            href="{{ url_for('contact') }}"
+            class="btn btn-outline"
+          >
+            Ask a Question
+          </a>
+        </div>
+
       </div>
+
     </div>
   </div>
 </section>
+
 {% endblock %}
