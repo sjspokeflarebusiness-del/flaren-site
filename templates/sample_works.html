@@ -1,318 +1,288 @@
 {% extends "base.html" %}
 
-{% block title %}FLAREN — Design & Simple Websites at Student-Friendly Prices{% endblock %}
+{% block title %}
+FLAREN — Sample Works
+{% endblock %}
 
 {% block content %}
 
-<!-- HERO -->
-<section class="hero">
+<section class="hero flaren-hero">
   <div class="container">
     <div class="hero-panel">
-      <img
-        src="{{ url_for('static', filename='images/logo.png') }}"
-        alt="FLAREN logo"
-        class="hero-logo"
-      >
+
+      <div class="hero-brand-mark">
+        <img
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="FLAREN logo"
+        >
+      </div>
+
+      <p class="hero-kicker">FLAREN CREATIVE STUDIO</p>
 
       <h1>
-        Design & Simple Websites<br>
-        at Student-Friendly Prices
+        Make your idea<br>
+        look professional.
       </h1>
 
-      <p class="hero-sub">
-        Posters, invitations, school projects, logos, and 1–5 page websites.
-        Clear pricing. Fast delivery. No confusion.
+      <p class="hero-description">
+        Posters, invitations, school projects, logos, cards, and simple
+        websites — created with clear communication and personal support.
       </p>
 
-      <div class="actions">
-        <a href="/work" class="btn btn-primary">
+      <div class="actions hero-actions">
+        <a
+          href="{{ url_for('work') }}"
+          class="btn btn-primary"
+        >
           Find My Service
         </a>
 
-        <a href="/order" class="btn btn-secondary">
+        <a
+          href="{{ url_for('order') }}"
+          class="btn btn-secondary"
+        >
           Place an Order
         </a>
       </div>
 
-      <p class="hero-note">
-        Typical delivery: 1–3 days. WhatsApp support included.
+      <div class="hero-promise">
+        <span>Friendly pricing</span>
+        <span>Fast delivery</span>
+        <span>WhatsApp support</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section flaren-work-section" id="sample-works-grid">
+  <div class="container">
+
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">SELECTED WORK</p>
+
+        <h2 class="section-title">
+          See what<br>
+          we can create.
+        </h2>
+      </div>
+
+      <p class="section-heading-text">
+        Browse our work, choose something you like, and open the project page
+        to see the starting price and order option.
       </p>
     </div>
-  </div>
-</section>
 
-<!-- TRUST BAR -->
-<section class="section" style="padding-top: 10px; padding-bottom: 10px;">
-  <div class="container">
-    <div class="trust-bar">
-      <span class="trust-item">✅ Student-friendly pricing</span>
-      <span class="trust-item">✅ Google Sheet + Email updates</span>
-      <span class="trust-item">✅ Simple process</span>
-      <span class="trust-item">✅ 1–3 day delivery</span>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES SNAPSHOT -->
-<section class="section">
-  <div class="container">
-
-    <h2 class="section-title">What We Do</h2>
-
-    <p class="section-text">
-      FLAREN helps students, creators, families, and small businesses with
-      practical design and simple web projects.
-    </p>
-
-    <div class="services-map">
-
-      <div class="service-card">
-        <div class="service-number">01</div>
-        <h3>Posters & Invitations</h3>
-        <p>
-          Event posters, birthday/wedding invitations, and shareable
-          WhatsApp images.
-        </p>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Order Now
-        </a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">02</div>
-        <h3>School & College Projects</h3>
-        <p>
-          Full project design: cover, layout, visuals, and presentation
-          slides.
-        </p>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Order Now
-        </a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">03</div>
-        <h3>Logos & Branding</h3>
-        <p>
-          Simple logos, color palettes, and basic brand kits for small
-          businesses.
-        </p>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Order Now
-        </a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">04</div>
-        <h3>Simple Websites</h3>
-        <p>
-          1–5 page websites with contact form, WhatsApp button, and Google
-          Sheet leads.
-        </p>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Order Now
-        </a>
-      </div>
-
-    </div>
-
-    <div class="center-actions">
-      <a href="/services" class="btn btn-secondary">
-        View All Services
-      </a>
-
-      <a href="/work" class="btn btn-primary">
-        Use Project Planner
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- HOW IT WORKS (SHORT) -->
-<section class="section">
-  <div class="container">
-
-    <h2 class="section-title">How It Works</h2>
-
-    <div class="steps-grid">
-
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Tell us your idea</h3>
-        <p>
-          Use the planner or order form. Share your goal, audience, and
-          deadline.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>We confirm & start</h3>
-        <p>
-          We clarify details, confirm price, and begin work within 24 hours.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Receive & revise</h3>
-        <p>
-          Get your design/site, request small changes, and launch confidently.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- SAMPLE WORKS -->
-<section class="section">
-  <div class="container">
-
-    <h2 class="section-title">Recent Work</h2>
-
-    <p class="section-text">
-      A few samples from recent projects. Every work is customized to the
-      client’s needs.
-    </p>
-
-    <div class="work-grid">
+    <div class="work-grid polished-work-grid">
       {% for work in sample_works %}
-      <div class="work-card">
-        <img
-          src="{{ url_for('static', filename='images/' + work.image) }}"
-          alt="{{ work.title }} sample"
-          loading="lazy"
-        >
+      <a
+        href="{{ url_for('work_detail', slug=work['key']) }}"
+        class="work-card polished-work-card"
+      >
+        <div class="work-image-wrap">
+          <img
+            src="{{ url_for('static', filename='images/' + work.image) }}"
+            alt="{{ work.title }}"
+            loading="lazy"
+          >
+        </div>
 
         <div class="work-info">
+          <div class="work-category">
+            {{ work.category }}
+          </div>
+
           <h3>{{ work.title }}</h3>
+
           <p>{{ work.desc }}</p>
 
-          <a
-            href="/work/{{ work.key }}"
-            class="btn btn-sm btn-outline"
-          >
-            View Details
-          </a>
+          <div class="work-card-bottom">
+            <strong>From {{ work.price }}</strong>
+
+            <span class="text-link">
+              View details <span>→</span>
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
 
-    <div class="center-actions">
-      <a href="/sample-works" class="btn btn-secondary">
-        View All Work
-      </a>
-
-      <a href="/order" class="btn btn-primary">
-        Start Your Project
-      </a>
-    </div>
-
   </div>
 </section>
 
-<!-- PRICING HIGHLIGHT -->
-<section class="section">
+<section class="section flaren-intro-section">
   <div class="container">
 
-    <h2 class="section-title">Simple, Student-Friendly Pricing</h2>
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">WHAT WE DO</p>
 
-    <p class="section-text">
-      Transparent packages so you know exactly what you get.
-    </p>
+        <h2 class="section-title">
+          Practical creative work<br>
+          for real projects.
+        </h2>
+      </div>
 
-    <div class="pricing-grid">
+      <p class="section-heading-text">
+        You do not need to understand complicated design categories. Tell us
+        your idea and FLAREN will help you choose the right service.
+      </p>
+    </div>
 
-      <div class="pricing-card">
-        <h3>Starter Design</h3>
-        <div class="price">₹599+</div>
-        <ul>
-          <li>Posters, invitations, or simple graphics</li>
-          <li>1–2 concepts</li>
-          <li>1–2 days delivery</li>
-        </ul>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Enquire Now
+    <div class="services-map">
+
+      <div class="service-card polished-card">
+        <div class="service-number">01</div>
+        <h3>Posters & Invitations</h3>
+        <p>
+          Event posters, birthday invitations, announcements, and
+          WhatsApp-ready designs.
+        </p>
+        <a href="{{ url_for('order') }}" class="text-link">
+          Start a design <span>→</span>
         </a>
       </div>
 
-      <div class="pricing-card featured">
-        <div class="featured-badge">Most Popular</div>
-        <h3>Project Pack</h3>
-        <div class="price">₹1,999+</div>
-        <ul>
-          <li>School/college project or presentation</li>
-          <li>Cover + layout + visuals</li>
-          <li>2–3 days delivery</li>
-        </ul>
-        <a href="/order" class="btn btn-sm btn-primary">
-          Enquire Now
+      <div class="service-card polished-card">
+        <div class="service-number">02</div>
+        <h3>School Projects</h3>
+        <p>
+          Project covers, layouts, presentations, visuals, and clean
+          educational designs.
+        </p>
+        <a href="{{ url_for('order') }}" class="text-link">
+          Start a project <span>→</span>
         </a>
       </div>
 
-      <div class="pricing-card">
-        <h3>Website Starter</h3>
-        <div class="price">₹4,999+</div>
-        <ul>
-          <li>1–3 page simple website</li>
-          <li>Contact form + WhatsApp button</li>
-          <li>3–5 days delivery</li>
-        </ul>
-        <a href="/order" class="btn btn-sm btn-outline">
-          Enquire Now
+      <div class="service-card polished-card">
+        <div class="service-number">03</div>
+        <h3>Logos & Branding</h3>
+        <p>
+          Simple logos, color combinations, and social media visuals for
+          small brands.
+        </p>
+        <a href="{{ url_for('order') }}" class="text-link">
+          Build your brand <span>→</span>
+        </a>
+      </div>
+
+      <div class="service-card polished-card">
+        <div class="service-number">04</div>
+        <h3>Simple Websites</h3>
+        <p>
+          Responsive 1–5 page websites with contact forms and WhatsApp
+          enquiry buttons.
+        </p>
+        <a href="{{ url_for('order') }}" class="text-link">
+          Build a website <span>→</span>
         </a>
       </div>
 
     </div>
+  </div>
+</section>
 
-    <p class="section-text" style="text-align: center; margin-top: 18px;">
-      Need something custom? Tell us your idea and we’ll suggest a suitable
-      package.
-    </p>
+<section class="section flaren-process-section">
+  <div class="container">
 
-    <div class="center-actions">
-      <a href="/work" class="btn btn-secondary">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">HOW IT WORKS</p>
+
+        <h2 class="section-title">
+          Simple from idea<br>
+          to final delivery.
+        </h2>
+      </div>
+
+      <a href="{{ url_for('work') }}" class="btn btn-outline">
         Use Project Planner
       </a>
-
-      <a href="/contact" class="btn btn-primary">
-        Talk to Us
-      </a>
     </div>
 
+    <div class="steps-grid polished-steps">
+
+      <div class="step-card">
+        <div class="step-top">
+          <span class="step-number">01</span>
+          <span class="step-arrow">↗</span>
+        </div>
+
+        <h3>Share your idea</h3>
+
+        <p>
+          Tell us what you want to create, who it is for, and when you need it.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top">
+          <span class="step-number">02</span>
+          <span class="step-arrow">↗</span>
+        </div>
+
+        <h3>We confirm the work</h3>
+
+        <p>
+          We recommend the right service and confirm the final requirements.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-top">
+          <span class="step-number">03</span>
+          <span class="step-arrow">↗</span>
+        </div>
+
+        <h3>Receive your result</h3>
+
+        <p>
+          Get your final design or website and request reasonable changes.
+        </p>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="section">
   <div class="container">
 
-    <div class="cta-panel">
+    <div class="final-cta">
+      <div>
+        <p class="section-kicker">HAVE AN IDEA?</p>
 
-      <h2>Ready to start your project?</h2>
+        <h2>
+          Let’s make it<br>
+          look professional.
+        </h2>
 
-      <p>
-        Tell us what you want to create. We’ll suggest the right service and
-        share a clear price and timeline.
-      </p>
+        <p>
+          Tell us what you need and we’ll guide you to the right FLAREN
+          service.
+        </p>
+      </div>
 
-      <div class="actions">
-        <a href="/work" class="btn btn-primary">
+      <div class="final-cta-actions">
+        <a href="{{ url_for('work') }}" class="btn btn-primary">
           Find My Service
         </a>
 
-        <a href="/contact" class="btn btn-secondary">
-          Ask a Question
+        <a href="{{ url_for('contact') }}" class="btn btn-secondary">
+          Contact FLAREN
         </a>
       </div>
-
     </div>
 
   </div>
 </section>
+
+<div class="flaren-owned-badge" aria-label="FLAREN">
+  <span class="flaren-owned-badge-mark">F</span>
+  <span>FLAREN</span>
+</div>
 
 {% endblock %}
