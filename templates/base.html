@@ -86,49 +86,101 @@
         Creative work made simple.
       </p>
 
-      <a href="{{ url_for('contact') }}">
-        Contact FLAREN
-      </a>
+      <div class="footer-links">
+        <a href="{{ url_for('contact') }}">
+          Contact FLAREN
+        </a>
+        <span class="footer-divider">•</span>
+        <a href="#home" class="back-to-top">
+          Back to top
+        </a>
+      </div>
     </div>
   </footer>
-<!-- FLAREN AI Assistant (MindPal) -->
-<style>
-  /* Make sure the chatbot stays on top but not obtrusive */
-  #mindpal-widget,
-  [id*="mindpal"],
-  .mindpal-widget {
-    z-index: 9999 !important;
-  }
 
-  /* Optional: adjust position slightly if needed */
-  /* This targets the floating container; selector may vary slightly */
-  .mindpal-floating-root {
-    right: 18px !important;
-    bottom: 18px !important;
-  }
+  <!-- FLAREN AI Assistant (MindPal) -->
+  <style>
+    /* Make sure the chatbot stays on top but not obtrusive */
+    #mindpal-widget,
+    [id*="mindpal"],
+    .mindpal-widget {
+      z-index: 9999 !important;
+    }
 
-  /* If you want it to appear a bit higher on mobile */
-  @media (max-width: 768px) {
+    /* Optional: adjust position slightly if needed */
     .mindpal-floating-root {
-      right: 12px !important;
-      bottom: 12px !important;
+      right: 18px !important;
+      bottom: 18px !important;
     }
-  }
-</style>
 
-<script>
-  window.mindpalConfig = {
-    chatbotId: "flaren-design-studio-assistant-efe",
-    display: {
-      type: "floating-corner",
-      anchor: "right"
-    },
-    behavior: {
-      showInitialMessageBubbleWhenMinimized: true,
-      minimizedByDefault: true
+    /* If you want it to appear a bit higher on mobile */
+    @media (max-width: 768px) {
+      .mindpal-floating-root {
+        right: 12px !important;
+        bottom: 12px !important;
+      }
     }
-  };
-</script>
-<script src="https://chatbot.getmindpal.com/embed.min.js"></script>
+
+    /* Small upgrade: footer links row */
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .footer-links a {
+      color: #c49b3b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      color: #c49b3b;
+      opacity: 0.7;
+    }
+
+    .back-to-top {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+  </style>
+
+  <script>
+    window.mindpalConfig = {
+      chatbotId: "flaren-design-studio-assistant-efe",
+      display: {
+        type: "floating-corner",
+        anchor: "right"
+      },
+      behavior: {
+        showInitialMessageBubbleWhenMinimized: true,
+        minimizedByDefault: true
+      }
+    };
+  </script>
+  <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
+
+  <!-- Small upgrade: smooth scroll for anchor links -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          const targetId = link.getAttribute('href').slice(1);
+          if (!targetId) return;
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
