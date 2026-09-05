@@ -26,7 +26,7 @@
   </div>
 </section>
 
-<!-- SELECTED WORK -->
+<!-- SAMPLE WORKS (same style as your sample-works page) -->
 <section class="section">
   <div class="container">
     <h2 class="section-title">SELECTED WORK</h2>
@@ -39,6 +39,11 @@
     <div class="work-grid">
       {% for work in sample_works %}
       <div class="work-card">
+        <img
+          src="{{ url_for('static', filename='images/' + work.image) }}"
+          alt="{{ work.title }}"
+          class="work-image"
+        >
         <div class="work-category">{{ work.category }}</div>
         <h4 class="work-title">{{ work.title }}</h4>
         <p class="work-desc">{{ work.desc }}</p>
