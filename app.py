@@ -295,7 +295,7 @@ def favicon():
 @app.route("/")
 def home():
     return render_template(
-        "sample_works.html",
+        "home.html",
         sample_works=SAMPLE_WORKS,
     )
 
