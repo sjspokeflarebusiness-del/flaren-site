@@ -1,293 +1,288 @@
-{% extends "base.html" %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-{% block title %}
-FLAREN — Home
-{% endblock %}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-{% block content %}
+  <meta
+    name="description"
+    content="FLAREN creates posters, invitations, school projects, logos, cards, and simple websites."
+  >
 
-<!-- HERO -->
-<section class="hero flaren-hero">
-  <div class="container">
-    <div class="hero-panel">
+  <meta name="theme-color" content="#c49b3b">
 
-      <div class="hero-brand-mark">
+  <title>
+    {% block title %}FLAREN{% endblock %}
+  </title>
+
+  <link
+    rel="icon"
+    href="{{ url_for('static', filename='favicon.ico') }}"
+    type="image/x-icon"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+  >
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="{{ url_for('home') }}" class="brand">
         <img
           src="{{ url_for('static', filename='images/logo.png') }}"
           alt="FLAREN logo"
+          class="brand-logo"
         >
-      </div>
+        <span>FLAREN</span>
+      </a>
 
-      <p class="hero-kicker">FLAREN CREATIVE STUDIO</p>
-
-      <h1>
-        Make your idea<br>
-        look professional.
-      </h1>
-
-      <p class="hero-description">
-        Posters, invitations, school projects, logos, cards, and simple
-        websites — created with clear communication and personal support.
-      </p>
-
-      <div class="actions hero-actions">
-        <a
-          href="{{ url_for('work') }}"
-          class="btn btn-primary"
-        >
-          Find My Service
-        </a>
-
+      <!-- Desktop nav -->
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('work') }}">Work</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('process') }}">Process</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
         <a
           href="{{ url_for('order') }}"
-          class="btn btn-secondary"
+          class="nav-order-button"
         >
-          Place an Order
+          Order Now
         </a>
-      </div>
+      </nav>
 
-      <div class="hero-promise">
-        <span>Friendly pricing</span>
-        <span>Fast delivery</span>
-        <span>WhatsApp support</span>
-      </div>
+      <!-- Mobile three-dots toggle -->
+      <button class="mobile-menu-toggle" aria-label="Open menu">
+        <span class="dot">•</span>
+        <span class="dot">•</span>
+        <span class="dot">•</span>
+      </button>
+
+      <!-- Mobile dropdown menu -->
+      <nav class="mobile-menu-dropdown" aria-label="Mobile navigation">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('work') }}">Work</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('process') }}">Process</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('order') }}" class="nav-order-button">
+          Order Now
+        </a>
+      </nav>
 
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- SELECTED WORK -->
-<section class="section flaren-work-section" id="sample-works-grid">
-  <div class="container">
-
-    <div class="section-heading-row">
-      <div>
-        <p class="section-kicker">SELECTED WORK</p>
-
-        <h2 class="section-title">
-          See what<br>
-          we can create.
-        </h2>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="flash-container container">
+        {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">
+          {{ message }}
+        </div>
+        {% endfor %}
       </div>
+      {% endif %}
+    {% endwith %}
 
-      <p class="section-heading-text">
-        Browse our work, choose something you like, and open the project page
-        to see the starting price and order option.
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        © {{ current_year if current_year else "2026" }} FLAREN.
+        Creative work made simple.
       </p>
-    </div>
 
-    <div class="work-grid polished-work-grid">
-      {% for work in sample_works %}
-      <a
-        href="{{ url_for('work_detail', slug=work['key']) }}"
-        class="work-card polished-work-card"
-      >
-        <div class="work-image-wrap">
-          <img
-            src="{{ url_for('static', filename='images/' + work.image) }}"
-            alt="{{ work.title }}"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="work-info">
-          <div class="work-category">
-            {{ work.category }}
-          </div>
-
-          <h3>{{ work.title }}</h3>
-
-          <p>{{ work.desc }}</p>
-
-          <div class="work-card-bottom">
-            <strong>From {{ work.price }}</strong>
-
-            <span class="text-link">
-              View details <span>→</span>
-            </span>
-          </div>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-
-  </div>
-</section>
-
-<!-- WHAT WE DO -->
-<section class="section flaren-intro-section">
-  <div class="container">
-
-    <div class="section-heading-row">
-      <div>
-        <p class="section-kicker">WHAT WE DO</p>
-
-        <h2 class="section-title">
-          Practical creative work<br>
-          for real projects.
-        </h2>
-      </div>
-
-      <p class="section-heading-text">
-        You do not need to understand complicated design categories. Tell us
-        your idea and FLAREN will help you choose the right service.
-      </p>
-    </div>
-
-    <div class="services-map">
-
-      <div class="service-card polished-card">
-        <div class="service-number">01</div>
-        <h3>Posters & Invitations</h3>
-        <p>
-          Event posters, birthday invitations, announcements, and
-          WhatsApp-ready designs.
-        </p>
-        <a href="{{ url_for('order') }}" class="text-link">
-          Start a design <span>→</span>
-        </a>
-      </div>
-
-      <div class="service-card polished-card">
-        <div class="service-number">02</div>
-        <h3>School Projects</h3>
-        <p>
-          Project covers, layouts, presentations, visuals, and clean
-          educational designs.
-        </p>
-        <a href="{{ url_for('order') }}" class="text-link">
-          Start a project <span>→</span>
-        </a>
-      </div>
-
-      <div class="service-card polished-card">
-        <div class="service-number">03</div>
-        <h3>Logos & Branding</h3>
-        <p>
-          Simple logos, color combinations, and social media visuals for
-          small brands.
-        </p>
-        <a href="{{ url_for('order') }}" class="text-link">
-          Build your brand <span>→</span>
-        </a>
-      </div>
-
-      <div class="service-card polished-card">
-        <div class="service-number">04</div>
-        <h3>Simple Websites</h3>
-        <p>
-          Responsive 1–5 page websites with contact forms and WhatsApp
-          enquiry buttons.
-        </p>
-        <a href="{{ url_for('order') }}" class="text-link">
-          Build a website <span>→</span>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section flaren-process-section">
-  <div class="container">
-
-    <div class="section-heading-row">
-      <div>
-        <p class="section-kicker">HOW IT WORKS</p>
-
-        <h2 class="section-title">
-          Simple from idea<br>
-          to final delivery.
-        </h2>
-      </div>
-
-      <a href="{{ url_for('work') }}" class="btn btn-outline">
-        Use Project Planner
-      </a>
-    </div>
-
-    <div class="steps-grid polished-steps">
-
-      <div class="step-card">
-        <div class="step-top">
-          <span class="step-number">01</span>
-          <span class="step-arrow">↗</span>
-        </div>
-
-        <h3>Share your idea</h3>
-
-        <p>
-          Tell us what you want to create, who it is for, and when you need it.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-top">
-          <span class="step-number">02</span>
-          <span class="step-arrow">↗</span>
-        </div>
-
-        <h3>We confirm the work</h3>
-
-        <p>
-          We recommend the right service and confirm the final requirements.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-top">
-          <span class="step-number">03</span>
-          <span class="step-arrow">↗</span>
-        </div>
-
-        <h3>Receive your result</h3>
-
-        <p>
-          Get your final design or website and request reasonable changes.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="section">
-  <div class="container">
-
-    <div class="final-cta">
-      <div>
-        <p class="section-kicker">HAVE AN IDEA?</p>
-
-        <h2>
-          Let’s make it<br>
-          look professional.
-        </h2>
-
-        <p>
-          Tell us what you need and we’ll guide you to the right FLAREN
-          service.
-        </p>
-      </div>
-
-      <div class="final-cta-actions">
-        <a href="{{ url_for('work') }}" class="btn btn-primary">
-          Find My Service
-        </a>
-
-        <a href="{{ url_for('contact') }}" class="btn btn-secondary">
+      <div class="footer-links">
+        <a href="{{ url_for('contact') }}">
           Contact FLAREN
         </a>
+        <span class="footer-divider">•</span>
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+           Back to top
+        </a>
       </div>
     </div>
+  </footer>
 
-  </div>
-</section>
+  <!-- Footer links style -->
+  <style>
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
 
-<div class="flaren-owned-badge" aria-label="FLAREN">
-  <span class="flaren-owned-badge-mark">F</span>
-  <span>FLAREN</span>
-</div>
+    .footer-links a {
+      color: #c49b3b;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-{% endblock %}
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      color: #c49b3b;
+      opacity: 0.7;
+    }
+
+    .back-to-top {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    /* Mobile menu toggle (three dots) */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+    }
+
+    .mobile-menu-toggle .dot {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #000;
+    }
+
+    .mobile-menu-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      min-width: 180px;
+      padding: 8px 0;
+      z-index: 9999;
+    }
+
+    .mobile-menu-dropdown a {
+      display: block;
+      padding: 10px 16px;
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .mobile-menu-dropdown a:hover {
+      background: #f5f5f5;
+    }
+
+    .mobile-menu-dropdown .nav-order-button {
+      font-weight: 700;
+      color: #c49b3b;
+    }
+
+    @media (max-width: 900px) {
+      .main-nav {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .mobile-menu-dropdown.open {
+        display: block;
+      }
+    }
+  </style>
+
+  <!-- Smooth scroll for anchor links -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          const targetId = link.getAttribute('href').slice(1);
+          if (!targetId) return;
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const dropdown = document.querySelector('.mobile-menu-dropdown');
+
+      if (toggle && dropdown) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          dropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- FLAREN AI Assistant (MindPal) -->
+  <script>
+    window.mindpalConfig = {
+      chatbotId: "flaren-design-studio-assistant-efe",
+      display: {
+        type: "floating-corner",
+        anchor: "right"
+      },
+      behavior: {
+        showInitialMessageBubbleWhenMinimized: true,
+        minimizedByDefault: true
+      }
+    };
+  </script>
+  <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
+
+  <style>
+    #mindpal-widget,
+    [id*="mindpal"],
+    .mindpal-widget {
+      z-index: 9999 !important;
+    }
+
+    .mindpal-floating-root {
+      right: 18px !important;
+      bottom: 18px !important;
+    }
+
+    @media (max-width: 768px) {
+      .mindpal-floating-root {
+        right: 12px !important;
+        bottom: 12px !important;
+      }
+    }
+  </style>
+
+</body>
+</html>
