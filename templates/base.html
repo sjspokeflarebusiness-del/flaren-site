@@ -93,35 +93,13 @@
         <span class="footer-divider">•</span>
         <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
            Back to top
-       </a>
+        </a>
       </div>
     </div>
   </footer>
 
-  <!-- FLAREN AI Assistant (MindPal) -->
+  <!-- Footer links style -->
   <style>
-    /* Make sure the chatbot stays on top but not obtrusive */
-    #mindpal-widget,
-    [id*="mindpal"],
-    .mindpal-widget {
-      z-index: 9999 !important;
-    }
-
-    /* Optional: adjust position slightly if needed */
-    .mindpal-floating-root {
-      right: 18px !important;
-      bottom: 18px !important;
-    }
-
-    /* If you want it to appear a bit higher on mobile */
-    @media (max-width: 768px) {
-      .mindpal-floating-root {
-        right: 12px !important;
-        bottom: 12px !important;
-      }
-    }
-
-    /* Small upgrade: footer links row */
     .footer-links {
       display: inline-flex;
       align-items: center;
@@ -150,22 +128,7 @@
     }
   </style>
 
-  <script>
-    window.mindpalConfig = {
-      chatbotId: "flaren-design-studio-assistant-efe",
-      display: {
-        type: "floating-corner",
-        anchor: "right"
-      },
-      behavior: {
-        showInitialMessageBubbleWhenMinimized: true,
-        minimizedByDefault: true
-      }
-    };
-  </script>
-  <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
-
-  <!-- Small upgrade: smooth scroll for anchor links -->
+  <!-- Smooth scroll for anchor links -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('a[href^="#"]').forEach(function (link) {
@@ -181,6 +144,14 @@
       });
     });
   </script>
+
+  <!-- FLAREN AI Assistant (LiveKit) -->
+  <script
+    src="https://cloud.livekit.io/embed-popup.js"
+    data-lk-agent="CA_kWcT47kDtdwk"
+    data-lk-color="#c49b3b"
+    data-lk-logo="{{ url_for('static', filename='images/logo.png') }}"
+  ></script>
 
 </body>
 </html>
