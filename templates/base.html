@@ -145,13 +145,41 @@
     });
   </script>
 
-  <!-- FLAREN AI Assistant (LiveKit) -->
-  <script
-    src="https://cloud.livekit.io/embed-popup.js"
-    data-lk-agent="CA_kWcT47kDtdwk"
-    data-lk-color="#c49b3b"
-    data-lk-logo="{{ url_for('static', filename='images/logo.png') }}"
-  ></script>
+ <!-- FLAREN AI Assistant (MindPal) -->
+<script>
+  window.mindpalConfig = {
+    chatbotId: "flaren-design-studio-assistant-efe",
+    display: {
+      type: "floating-corner",
+      anchor: "right"
+    },
+    behavior: {
+      showInitialMessageBubbleWhenMinimized: true,
+      minimizedByDefault: true
+    }
+  };
+</script>
+<script src="https://chatbot.getmindpal.com/embed.min.js"></script>
+
+<style>
+  #mindpal-widget,
+  [id*="mindpal"],
+  .mindpal-widget {
+    z-index: 9999 !important;
+  }
+
+  .mindpal-floating-root {
+    right: 18px !important;
+    bottom: 18px !important;
+  }
+
+  @media (max-width: 768px) {
+    .mindpal-floating-root {
+      right: 12px !important;
+      bottom: 12px !important;
+    }
+  }
+</style>
 
 </body>
 </html>
