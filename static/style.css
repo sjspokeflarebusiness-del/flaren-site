@@ -2804,3 +2804,27 @@ a {
     padding: 9px 13px;
   }
 }
+.work-price {
+  font-weight: 700;
+  color: #c49b3b;
+  font-size: 15px;
+}
+
+.work-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.work-link {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.work-link:hover {
+  text-decoration: underline;
+}
