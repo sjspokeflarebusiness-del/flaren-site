@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-FLAREN — Sample Works
+FLAREN — Home
 {% endblock %}
 
 {% block content %}
 
+<!-- HERO -->
 <section class="hero flaren-hero">
   <div class="container">
     <div class="hero-panel">
@@ -55,15 +56,14 @@ FLAREN — Sample Works
   </div>
 </section>
 
-<section class="section flaren-work-section" id="sample-works-grid">
-  <div class="container">
-
-    <div class="section-heading-row">
-      <div>
 <!-- HOW TO ORDER IN 3 STEPS -->
 <section class="section how-to-order-section">
   <div class="container">
-    <h2 class="section-title">How to order in 3 steps</h2>
+    <p class="section-kicker">HOW TO ORDER</p>
+    <h2 class="section-title">
+      How to order in 3 steps
+    </h2>
+
     <div class="how-to-order-grid">
       <div class="how-to-step">
         <div class="step-number">01</div>
@@ -89,11 +89,19 @@ FLAREN — Sample Works
         </p>
       </div>
     </div>
+
     <div class="how-to-cta">
       <a href="{{ url_for('order') }}" class="btn btn-primary">Start My Project</a>
     </div>
   </div>
-</section>        
+</section>
+
+<!-- SELECTED WORK -->
+<section class="section flaren-work-section" id="sample-works-grid">
+  <div class="container">
+
+    <div class="section-heading-row">
+      <div>
         <p class="section-kicker">SELECTED WORK</p>
 
         <h2 class="section-title">
@@ -146,6 +154,7 @@ FLAREN — Sample Works
   </div>
 </section>
 
+<!-- WHAT WE DO -->
 <section class="section flaren-intro-section">
   <div class="container">
 
@@ -219,6 +228,7 @@ FLAREN — Sample Works
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section class="section flaren-process-section">
   <div class="container">
 
@@ -282,6 +292,7 @@ FLAREN — Sample Works
   </div>
 </section>
 
+<!-- FINAL CTA -->
 <section class="section">
   <div class="container">
 
