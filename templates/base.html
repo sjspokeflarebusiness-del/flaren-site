@@ -36,6 +36,7 @@
   <header class="site-header">
     <div class="container nav-container">
 
+      <!-- Logo (left) -->
       <a href="{{ url_for('home') }}" class="brand">
         <img
           src="{{ url_for('static', filename='images/logo.png') }}"
@@ -61,11 +62,11 @@
         </a>
       </nav>
 
-      <!-- Mobile three-dots toggle -->
+      <!-- Mobile hamburger button (right) -->
       <button class="mobile-menu-toggle" aria-label="Open menu">
-        <span class="dot">•</span>
-        <span class="dot">•</span>
-        <span class="dot">•</span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
       </button>
 
       <!-- Mobile dropdown menu -->
@@ -148,24 +149,28 @@
       opacity: 0.9;
     }
 
-    /* Mobile menu toggle (three dots) */
+    /* Mobile hamburger menu */
     .mobile-menu-toggle {
       display: none;
-      background: none;
-      border: none;
-      padding: 6px 8px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 40px;
+      height: 38px;
+      padding: 8px 10px;
       cursor: pointer;
       flex-direction: column;
-      gap: 4px;
-      align-items: flex-end;
+      justify-content: center;
+      gap: 5px;
+      align-items: center;
     }
 
-    .mobile-menu-toggle .dot {
+    .hamburger-line {
       display: block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      width: 20px;
+      height: 2px;
       background: #000;
+      border-radius: 2px;
     }
 
     .mobile-menu-dropdown {
@@ -180,6 +185,7 @@
       min-width: 180px;
       padding: 8px 0;
       z-index: 9999;
+      margin-top: 6px;
     }
 
     .mobile-menu-dropdown a {
