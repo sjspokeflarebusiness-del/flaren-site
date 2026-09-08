@@ -1,11 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1"
+  >
+
+  <!-- Google Search Console ownership verification -->
+  <meta
+    name="google-site-verification"
+    content="M3ZficrQoJMgJ5kCP6wnHb_sLrAf_FE_yD82-ts3UXA"
   >
 
   <meta
@@ -70,7 +76,7 @@
         </a>
       </nav>
 
-      <!-- Mobile hamburger button on the right -->
+      <!-- Mobile hamburger button -->
       <button
         type="button"
         class="mobile-menu-toggle"
@@ -108,7 +114,7 @@
     </div>
   </header>
 
-  <!-- FLASH MESSAGES -->
+  <!-- MAIN CONTENT -->
   <main>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -198,7 +204,9 @@
       });
 
       menu.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", closeMenu);
+        link.addEventListener("click", function () {
+          closeMenu();
+        });
       });
 
       document.addEventListener("keydown", function (event) {
