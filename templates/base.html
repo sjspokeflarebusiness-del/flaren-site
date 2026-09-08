@@ -10,14 +10,12 @@
 
   <meta
     name="description"
-    content="FLAREN creates posters, invitations, school projects, logos, cards, and simple websites."
+    content="FLAREN creates posters, invitations, school projects, logos, cards, digital designs, and simple websites."
   >
 
   <meta name="theme-color" content="#c49b3b">
 
-  <title>
-    {% block title %}FLAREN{% endblock %}
-  </title>
+  <title>{% block title %}FLAREN{% endblock %}</title>
 
   <link
     rel="icon"
@@ -33,27 +31,37 @@
 
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav-container">
 
-      <!-- Logo (left) -->
-      <a href="{{ url_for('home') }}" class="brand">
+      <!-- Logo on the left -->
+      <a
+        href="{{ url_for('home') }}"
+        class="brand"
+        aria-label="FLAREN home"
+      >
         <img
           src="{{ url_for('static', filename='images/logo.png') }}"
           alt="FLAREN logo"
           class="brand-logo"
         >
-        <span>FLAREN</span>
+
+        <span class="brand-name">FLAREN</span>
       </a>
 
-      <!-- Desktop nav -->
-      <nav class="main-nav" aria-label="Main navigation">
+      <!-- Desktop navigation -->
+      <nav
+        class="main-nav"
+        aria-label="Desktop navigation"
+      >
         <a href="{{ url_for('home') }}">Home</a>
         <a href="{{ url_for('work') }}">Work</a>
         <a href="{{ url_for('services') }}">Services</a>
         <a href="{{ url_for('process') }}">Process</a>
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
+
         <a
           href="{{ url_for('order') }}"
           class="nav-order-button"
@@ -62,22 +70,37 @@
         </a>
       </nav>
 
-      <!-- Mobile hamburger button (right) -->
-      <button class="mobile-menu-toggle" aria-label="Open menu">
+      <!-- Mobile hamburger button on the right -->
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
 
-      <!-- Mobile dropdown menu -->
-      <nav class="mobile-menu-dropdown" aria-label="Mobile navigation">
+      <!-- Mobile navigation dropdown -->
+      <nav
+        id="mobile-menu"
+        class="mobile-menu-dropdown"
+        aria-label="Mobile navigation"
+        aria-hidden="true"
+      >
         <a href="{{ url_for('home') }}">Home</a>
         <a href="{{ url_for('work') }}">Work</a>
         <a href="{{ url_for('services') }}">Services</a>
         <a href="{{ url_for('process') }}">Process</a>
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
-        <a href="{{ url_for('order') }}" class="nav-order-button">
+
+        <a
+          href="{{ url_for('order') }}"
+          class="mobile-order-link"
+        >
           Order Now
         </a>
       </nav>
@@ -85,24 +108,27 @@
     </div>
   </header>
 
+  <!-- FLASH MESSAGES -->
   <main>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-      <div class="flash-container container">
-        {% for category, message in messages %}
-        <div class="flash-message flash-{{ category }}">
-          {{ message }}
+        <div class="flash-container container">
+          {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
       {% endif %}
     {% endwith %}
 
     {% block content %}{% endblock %}
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
+
       <p>
         © {{ current_year if current_year else "2026" }} FLAREN.
         Creative work made simple.
@@ -112,149 +138,84 @@
         <a href="{{ url_for('contact') }}">
           Contact FLAREN
         </a>
+
         <span class="footer-divider">•</span>
-        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-           Back to top
+
+        <a
+          href="#"
+          class="back-to-top"
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+        >
+          Back to top
         </a>
       </div>
+
     </div>
   </footer>
 
-  <!-- Footer links style -->
-  <style>
-    .footer-links {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    .footer-links a {
-      color: #c49b3b;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-divider {
-      color: #c49b3b;
-      opacity: 0.7;
-    }
-
-    .back-to-top {
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    /* Mobile hamburger menu */
-    .mobile-menu-toggle {
-      display: none;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      width: 40px;
-      height: 38px;
-      padding: 8px 10px;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      align-items: center;
-    }
-
-    .hamburger-line {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: #000;
-      border-radius: 2px;
-    }
-
-    .mobile-menu-dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      min-width: 180px;
-      padding: 8px 0;
-      z-index: 9999;
-      margin-top: 6px;
-    }
-
-    .mobile-menu-dropdown a {
-      display: block;
-      padding: 10px 16px;
-      color: #000;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .mobile-menu-dropdown a:hover {
-      background: #f5f5f5;
-    }
-
-    .mobile-menu-dropdown .nav-order-button {
-      font-weight: 700;
-      color: #c49b3b;
-    }
-
-    @media (max-width: 900px) {
-      .main-nav {
-        display: none;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .mobile-menu-dropdown.open {
-        display: block;
-      }
-    }
-  </style>
-
-  <!-- Smooth scroll for anchor links -->
+  <!-- MOBILE MENU SCRIPT -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          const targetId = link.getAttribute('href').slice(1);
-          if (!targetId) return;
-          const target = document.getElementById(targetId);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.querySelector(".mobile-menu-toggle");
+      const menu = document.querySelector("#mobile-menu");
+
+      if (!toggle || !menu) {
+        return;
+      }
+
+      function closeMenu() {
+        menu.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation menu");
+        menu.setAttribute("aria-hidden", "true");
+      }
+
+      function openMenu() {
+        menu.classList.add("is-open");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close navigation menu");
+        menu.setAttribute("aria-hidden", "false");
+      }
+
+      toggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        if (menu.classList.contains("is-open")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
       });
 
-      // Mobile menu toggle
-      const toggle = document.querySelector('.mobile-menu-toggle');
-      const dropdown = document.querySelector('.mobile-menu-dropdown');
+      document.addEventListener("click", function (event) {
+        if (
+          menu.classList.contains("is-open") &&
+          !menu.contains(event.target) &&
+          !toggle.contains(event.target)
+        ) {
+          closeMenu();
+        }
+      });
 
-      if (toggle && dropdown) {
-        toggle.addEventListener('click', function (e) {
-          e.stopPropagation();
-          dropdown.classList.toggle('open');
-        });
+      menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
 
-        document.addEventListener('click', function (e) {
-          if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove('open');
-          }
-        });
-      }
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 900) {
+          closeMenu();
+        }
+      });
     });
   </script>
 
-  <!-- FLAREN AI Assistant (MindPal) -->
+  <!-- FLAREN AI ASSISTANT: MINDPAL -->
   <script>
     window.mindpalConfig = {
       chatbotId: "flaren-design-studio-assistant-efe",
@@ -268,12 +229,16 @@
       }
     };
   </script>
+
   <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
 
+  <!-- MindPal positioning -->
   <style>
     #mindpal-widget,
     [id*="mindpal"],
-    .mindpal-widget {
+    [class*="mindpal"],
+    .mindpal-widget,
+    .mindpal-floating-root {
       z-index: 9999 !important;
     }
 
