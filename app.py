@@ -48,17 +48,35 @@ OWNER_PHONE = os.getenv(
     "8838969397",
 )
 
+# Add this value in Render Environment Variables.
+# Do not place the real webhook URL directly in public source code.
 APPS_SCRIPT_WEBHOOK_URL = os.getenv(
     "APPS_SCRIPT_WEBHOOK_URL",
-    "https://script.google.com/macros/s/"
-    "AKfycbzu3DUX5GsVlGNz5ts01dkZ6Vq7B9Wozr4BcP2iSr7mbF5vbCac27niA9_w66P3S7fOOw"
-    "/exec",
+    "",
 )
 
-SMTP_SERVER = os.getenv("SMTP_SERVER", "")
-SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-SMTP_USER = os.getenv("SMTP_USER", "")
-SMTP_PASS = os.getenv("SMTP_PASS", "")
+SMTP_SERVER = os.getenv(
+    "SMTP_SERVER",
+    "",
+)
+
+SMTP_PORT = int(
+    os.getenv(
+        "SMTP_PORT",
+        "587",
+    )
+)
+
+SMTP_USER = os.getenv(
+    "SMTP_USER",
+    "",
+)
+
+SMTP_PASS = os.getenv(
+    "SMTP_PASS",
+    "",
+)
+
 SMTP_FROM = os.getenv(
     "SMTP_FROM",
     SMTP_USER or OWNER_EMAIL,
@@ -66,7 +84,7 @@ SMTP_FROM = os.getenv(
 
 
 # ============================================================
-# FLAREN V2 SERVICE STRUCTURE
+# SERVICE CATEGORIES
 # ============================================================
 
 SERVICE_CATEGORIES = [
@@ -79,11 +97,18 @@ SERVICE_CATEGORIES = [
         ),
         "items": [
             "Posters and advertisements",
-            "Social-media creatives",
-            "Invitations and cards",
-            "Logos and basic branding",
-            "Menus and certificates",
-            "Wallpapers and digital artwork",
+            "Advertisement creatives",
+            "Social-media posts",
+            "YouTube thumbnails",
+            "Invitations",
+            "Business cards",
+            "Certificates",
+            "Menus",
+            "Wallpapers",
+            "Digital artwork",
+            "Logos",
+            "Brand identity",
+            "Event graphics",
         ],
     },
     {
@@ -98,9 +123,12 @@ SERVICE_CATEGORIES = [
             "Student portfolios",
             "Business websites",
             "Landing pages",
-            "Event pages",
+            "Event websites",
+            "Product and catalog websites",
             "Digital business cards",
             "Link-in-bio pages",
+            "Simple booking pages",
+            "Simple contact pages",
             "Website redesigns",
         ],
     },
@@ -109,16 +137,21 @@ SERVICE_CATEGORIES = [
         "title": "QR and Smart Digital",
         "description": (
             "Useful digital links and QR experiences for sharing "
-            "menus, portfolios, contact details, and events."
+            "menus, portfolios, contact details, events, and campaigns."
         ),
         "items": [
-            "QR menus",
+            "QR-code generation",
             "QR business cards",
+            "QR menus",
             "QR portfolios",
-            "QR WhatsApp links",
             "QR event pages",
+            "QR photo galleries",
+            "QR video pages",
+            "QR WhatsApp contact",
+            "QR feedback forms",
+            "QR review links",
             "Digital contact cards",
-            "QR feedback links",
+            "FLAREN Smart Link concepts",
         ],
     },
     {
@@ -129,37 +162,99 @@ SERVICE_CATEGORIES = [
             "projects, educational events, and learning materials."
         ),
         "items": [
-            "Project covers",
             "Presentation design",
+            "Project covers",
+            "Project layouts",
             "Educational diagrams",
             "Infographics",
             "Certificates",
-            "School event materials",
+            "Study planners",
+            "Timetables",
+            "Digital notes templates",
             "Competition posters",
+            "School event materials",
+        ],
+    },
+    {
+        "key": "business",
+        "title": "Business Creative",
+        "description": (
+            "Practical creative support for shops, tutors, startups, "
+            "small businesses, and local brands."
+        ),
+        "items": [
+            "Business posters",
+            "Product advertisements",
+            "Restaurant menus",
+            "Digital catalogs",
+            "Social-media packs",
+            "Business cards",
+            "Logo packages",
+            "Brand starter kits",
+            "Product launch graphics",
+            "Promotional campaigns",
+            "QR marketing",
+            "Simple business websites",
+        ],
+    },
+    {
+        "key": "digital-products",
+        "title": "Digital Products",
+        "description": (
+            "Reusable digital resources that can be created once "
+            "and offered repeatedly."
+        ),
+        "items": [
+            "Canva template packs",
+            "Invitation packs",
+            "Poster packs",
+            "Social-media packs",
+            "Presentation templates",
+            "Student project templates",
+            "Resume templates",
+            "Portfolio templates",
+            "Business-card templates",
+            "Menu templates",
+            "Planner templates",
+            "Budget templates",
+            "Digital journals",
+            "Website templates",
+            "QR template packs",
         ],
     },
 ]
 
 
-# Backward-compatible service list for the existing order form.
+# ============================================================
+# ORDER FORM SERVICE OPTIONS
+# ============================================================
+
 SERVICES = [
     "Poster or advertisement design",
-    "Social-media creative",
-    "Invitation or card design",
-    "Logo or basic branding",
-    "Menu or certificate design",
+    "Social-media post or creative",
+    "YouTube thumbnail",
+    "Invitation design",
+    "Business card design",
+    "Certificate or menu design",
+    "Logo or brand identity",
     "Wallpaper or digital artwork",
     "Personal portfolio website",
     "Student portfolio website",
     "Business website",
     "Landing page",
     "Event website",
+    "Product or catalog website",
     "Digital business card",
+    "Link-in-bio page",
     "QR menu or QR business card",
     "QR portfolio or QR event page",
+    "QR WhatsApp contact",
+    "QR feedback or review link",
     "School project design",
     "Presentation design",
     "Educational diagram or infographic",
+    "Business creative package",
+    "Digital product or template",
     "Custom digital work",
 ]
 
@@ -174,13 +269,14 @@ PACKAGES = [
         "name": "FLAREN Starter",
         "category": "Branding",
         "short_description": (
-            "A simple starting identity for an individual, "
-            "creator, or small business."
+            "A simple identity package for an individual, creator, "
+            "student project, or small business."
         ),
         "includes": [
             "Simple logo concept",
-            "Brand color direction",
+            "Brand colour direction",
             "Business card or digital profile graphic",
+            "QR code when required",
             "One revision round",
             "Final files in agreed formats",
         ],
@@ -192,14 +288,15 @@ PACKAGES = [
         "name": "FLAREN Promote",
         "category": "Marketing Design",
         "short_description": (
-            "A practical creative package for an event, offer, "
-            "product, shop, or announcement."
+            "A practical package for an event, offer, product, "
+            "shop, announcement, or campaign."
         ),
         "includes": [
             "One main promotional poster",
-            "Two social-media or WhatsApp versions",
-            "Clear call-to-action layout",
-            "QR code when required",
+            "Social-media creatives",
+            "WhatsApp-ready version",
+            "Product or offer graphic",
+            "QR campaign element when required",
             "One revision round",
         ],
         "price": "Starting price confirmed after requirements",
@@ -211,25 +308,46 @@ PACKAGES = [
         "category": "Website and Digital Presence",
         "short_description": (
             "A simple online presence for a person, event, creator, "
-            "or small business."
+            "student, or small business."
         ),
         "includes": [
             "One-page responsive landing page",
-            "Contact or WhatsApp button",
+            "Digital business card direction",
+            "QR link when required",
+            "Contact or WhatsApp integration",
             "Customer-provided text and images",
-            "Clear call-to-action section",
             "One revision round",
         ],
         "price": "Starting price confirmed after requirements",
         "cta": "Choose Digital",
     },
     {
+        "key": "brand",
+        "name": "FLAREN Brand",
+        "category": "Complete Brand Starter",
+        "short_description": (
+            "A broader starting system for a business that needs "
+            "consistent visual communication."
+        ),
+        "includes": [
+            "Logo direction",
+            "Brand colours",
+            "Typography direction",
+            "Business card",
+            "Promotional poster",
+            "Social-media starter graphic",
+            "Website or QR add-on after review",
+        ],
+        "price": "Quote after project review",
+        "cta": "Discuss Brand",
+    },
+    {
         "key": "custom",
         "name": "FLAREN Custom",
         "category": "Custom Project",
         "short_description": (
-            "For ideas that need a combination of design, website, "
-            "QR, education, or digital work."
+            "For ideas that combine design, websites, QR, education, "
+            "business creative, or digital products."
         ),
         "includes": [
             "Project requirements review",
@@ -252,7 +370,9 @@ SAMPLE_WORKS = [
     {
         "key": "logo",
         "title": "FLAREN Logo Design",
-        "desc": "A bold visual identity created for the FLAREN brand.",
+        "desc": (
+            "A bold visual identity created for the FLAREN brand."
+        ),
         "image": "logo.png",
         "price": "₹499",
         "category": "Branding",
@@ -274,7 +394,9 @@ SAMPLE_WORKS = [
     {
         "key": "personal_portfolio",
         "title": "Personal Portfolio Design",
-        "desc": "A polished visual portfolio for personal creative work.",
+        "desc": (
+            "A polished visual portfolio for personal creative work."
+        ),
         "image": "portfolio-1.png",
         "price": "₹499",
         "category": "Portfolio Design",
@@ -289,8 +411,8 @@ SAMPLE_WORKS = [
             "personal creative projects."
         ),
         "solution": (
-            "A clean portfolio layout focused on visual work and "
-            "easy navigation."
+            "A clean portfolio layout focused on visual work "
+            "and easy navigation."
         ),
     },
     {
@@ -384,8 +506,8 @@ SAMPLE_WORKS = [
         ),
         "project_type": "Concept project",
         "challenge": (
-            "The card needed to balance useful information with "
-            "a visually attractive presentation."
+            "The card needed to balance useful information "
+            "with an attractive presentation."
         ),
         "solution": (
             "A clean card layout suitable for digital sharing "
@@ -457,7 +579,7 @@ def send_to_sheets(payload):
     """Send order/contact data to Google Apps Script."""
     if not APPS_SCRIPT_WEBHOOK_URL:
         app.logger.warning(
-            "APPS_SCRIPT_WEBHOOK_URL is empty."
+            "APPS_SCRIPT_WEBHOOK_URL is not configured."
         )
         return False
 
@@ -573,7 +695,7 @@ def inject_global_template_values():
 
 
 # ============================================================
-# FAVICON
+# STATIC AND SEO FILES
 # ============================================================
 
 @app.route("/favicon.ico")
@@ -587,10 +709,6 @@ def favicon():
         mimetype="image/vnd.microsoft.icon",
     )
 
-
-# ============================================================
-# SEO FILES
-# ============================================================
 
 @app.route("/robots.txt")
 def robots_txt():
@@ -629,7 +747,7 @@ def health():
 
 
 # ============================================================
-# HOME
+# HOME AND WORK
 # ============================================================
 
 @app.route("/")
@@ -649,49 +767,6 @@ def sample_works():
         sample_works=SAMPLE_WORKS,
     )
 
-
-# ============================================================
-# SERVICES AND PROCESS
-# ============================================================
-
-@app.route("/services")
-def services():
-    return render_template(
-        "services.html",
-        services=SERVICES,
-        service_categories=SERVICE_CATEGORIES,
-        packages=PACKAGES,
-    )
-
-
-@app.route("/how-it-works")
-def how_it_works():
-    return render_template(
-        "how_it_works.html",
-        packages=PACKAGES,
-    )
-
-
-@app.route("/process")
-def process():
-    return render_template(
-        "process.html",
-        packages=PACKAGES,
-    )
-
-
-# ============================================================
-# ABOUT
-# ============================================================
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-
-# ============================================================
-# INTERACTIVE WORK / PROJECT PLANNER
-# ============================================================
 
 @app.route("/work", methods=["GET", "POST"])
 def work():
@@ -713,13 +788,13 @@ def work():
                 ),
                 "next_step": (
                     "Prepare the event name, date, venue, theme, "
-                    "colors, and required size."
+                    "colours, and required size."
                 ),
             },
             "business": {
                 "service": (
                     "FLAREN Starter, FLAREN Promote, FLAREN Digital, "
-                    "or a custom business project"
+                    "FLAREN Brand, or a custom business project"
                 ),
                 "reason": (
                     "These options can help your business look more "
@@ -753,13 +828,13 @@ def work():
                     "events, gifts, profiles, and creative ideas."
                 ),
                 "next_step": (
-                    "Prepare your idea, preferred colors, reference "
+                    "Prepare your idea, preferred colours, reference "
                     "images, and final size."
                 ),
             },
             "website": {
                 "service": (
-                    "FLAREN Digital or Simple Website"
+                    "FLAREN Digital or Website Studio"
                 ),
                 "reason": (
                     "A simple website can present your work, services, "
@@ -799,6 +874,68 @@ def work():
     )
 
 
+@app.route("/work/<slug>")
+def work_detail(slug):
+    selected_work = next(
+        (
+            work_item
+            for work_item in SAMPLE_WORKS
+            if work_item["key"] == slug
+        ),
+        None,
+    )
+
+    if selected_work is None:
+        return render_template(
+            "404.html"
+        ), 404
+
+    return render_template(
+        "work_detail.html",
+        work=selected_work,
+        sample_works=SAMPLE_WORKS,
+    )
+
+
+# ============================================================
+# SERVICES AND INFORMATION
+# ============================================================
+
+@app.route("/services")
+def services():
+    return render_template(
+        "services.html",
+        services=SERVICES,
+        service_categories=SERVICE_CATEGORIES,
+        packages=PACKAGES,
+    )
+
+
+@app.route("/how-it-works")
+def how_it_works():
+    return render_template(
+        "how_it_works.html",
+        packages=PACKAGES,
+    )
+
+
+@app.route("/process")
+def process():
+    return render_template(
+        "process.html",
+        packages=PACKAGES,
+    )
+
+
+@app.route("/about")
+def about():
+    return render_template(
+        "about.html",
+        service_categories=SERVICE_CATEGORIES,
+        packages=PACKAGES,
+    )
+
+
 # ============================================================
 # CONTACT
 # ============================================================
@@ -806,9 +943,15 @@ def work():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = clean(request.form.get("contactName"))
-        email = clean(request.form.get("contactEmail"))
-        message = clean(request.form.get("contactMessage"))
+        name = clean(
+            request.form.get("contactName")
+        )
+        email = clean(
+            request.form.get("contactEmail")
+        )
+        message = clean(
+            request.form.get("contactMessage")
+        )
 
         if not name or not email or not message:
             flash(
@@ -839,20 +982,26 @@ def contact():
         <html>
           <body>
             <h2>New FLAREN Contact Message</h2>
+
             <p>
               <strong>Contact ID:</strong>
               {escape(contact_id)}
             </p>
+
             <p>
               <strong>Name:</strong>
               {html_text(name)}
             </p>
+
             <p>
               <strong>Email:</strong>
               {html_text(email)}
             </p>
-            <p><strong>Message:</strong></p>
-            <p>{html_text(message)}</p>
+
+            <p>
+              <strong>Message:</strong><br>
+              {html_text(message)}
+            </p>
           </body>
         </html>
         """
@@ -871,17 +1020,26 @@ def contact():
         <html>
           <body>
             <h2>Thank you for contacting FLAREN</h2>
-            <p>Hi {html_text(name)},</p>
+
+            <p>
+              Hi {html_text(name)},
+            </p>
+
             <p>
               We received your message successfully and will get
               back to you soon.
             </p>
+
             <p>
               <strong>Reference ID:</strong>
               {escape(contact_id)}
             </p>
-            <p><strong>Your message:</strong></p>
-            <p>{html_text(message)}</p>
+
+            <p>
+              <strong>Your message:</strong><br>
+              {html_text(message)}
+            </p>
+
             <p>— Team FLAREN</p>
           </body>
         </html>
@@ -910,7 +1068,9 @@ def contact():
                 "error",
             )
 
-        return redirect(url_for("contact"))
+        return redirect(
+            url_for("contact")
+        )
 
     return render_template(
         "contact.html",
@@ -979,6 +1139,13 @@ def order():
         if not order_data["email"]:
             flash(
                 "Please enter your email.",
+                "error",
+            )
+            return redirect(url_for("order"))
+
+        if not order_data["phone"]:
+            flash(
+                "Please enter your phone or WhatsApp number.",
                 "error",
             )
             return redirect(url_for("order"))
@@ -1124,7 +1291,7 @@ def order():
         )
 
         customer_subject = (
-            f"FLAREN — Order Request Received: {order_id}"
+            f"FLAREN — Project Request Received: {order_id}"
         )
 
         customer_body_html = f"""
@@ -1144,7 +1311,7 @@ def order():
             </p>
 
             <p>
-              <strong>Order ID:</strong>
+              <strong>Reference ID:</strong>
               {escape(order_id)}
             </p>
 
@@ -1156,13 +1323,13 @@ def order():
             </p>
 
             <p>
-              FLAREN will review your details and contact you to
-              confirm the final scope, price, and delivery time.
+              We will review your details and contact you to confirm
+              the final scope, price, and delivery time.
             </p>
 
             <p>
-              Submitting this request does not automatically
-              confirm a final price or start date.
+              Submitting this request does not automatically confirm
+              a final price, start date, or delivery date.
             </p>
 
             <p>— Team FLAREN</p>
@@ -1216,33 +1383,6 @@ def order_success():
     return render_template(
         "order_success.html",
         order_id=order_id,
-    )
-
-
-# ============================================================
-# WORK DETAIL PAGES
-# ============================================================
-
-@app.route("/work/<slug>")
-def work_detail(slug):
-    selected_work = next(
-        (
-            work_item
-            for work_item in SAMPLE_WORKS
-            if work_item["key"] == slug
-        ),
-        None,
-    )
-
-    if selected_work is None:
-        return render_template(
-            "404.html"
-        ), 404
-
-    return render_template(
-        "work_detail.html",
-        work=selected_work,
-        sample_works=SAMPLE_WORKS,
     )
 
 
