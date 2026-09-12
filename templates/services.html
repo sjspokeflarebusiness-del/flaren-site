@@ -18,8 +18,8 @@ FLAREN — Services
       </h1>
 
       <p class="hero-description">
-        FLAREN turns ideas into professional designs, websites, and digital
-        solutions for students, creators, events, and small businesses.
+        FLAREN turns ideas into professional designs, websites, QR
+        experiences, and digital solutions.
       </p>
 
       <div class="actions">
@@ -47,17 +47,17 @@ FLAREN — Services
 
     <div class="section-heading-row">
       <div>
-        <p class="section-kicker">FLAREN SERVICES</p>
+        <p class="section-kicker">SIX DIRECTIONS</p>
 
         <h2 class="section-title">
-          Choose a direction<br>
-          for your project.
+          Choose the kind<br>
+          of result you need.
         </h2>
       </div>
 
       <p class="section-heading-text">
-        Start with the type of result you need. If you are unsure, use the
-        Project Planner or describe your idea in the order form.
+        Start with your goal instead of trying to understand every individual
+        design service.
       </p>
     </div>
 
@@ -92,7 +92,26 @@ FLAREN — Services
       </article>
       {% endfor %}
 
+      <article class="service-card polished-card">
+        <div class="service-number">07</div>
+
+        <h3>Custom Projects</h3>
+
+        <p>
+          Have an idea that does not fit one category? Tell us what you want
+          to achieve and we will recommend an approach.
+        </p>
+
+        <a
+          href="{{ url_for('order') }}"
+          class="text-link"
+        >
+          Discuss a custom project <span>→</span>
+        </a>
+      </article>
+
     </div>
+
   </div>
 </section>
 
@@ -104,29 +123,31 @@ FLAREN — Services
         <p class="section-kicker">PACKAGES</p>
 
         <h2 class="section-title">
-          Start with a clear<br>
-          project direction.
+          Easier ways<br>
+          to get started.
         </h2>
       </div>
 
       <p class="section-heading-text">
-        Packages make it easier to understand what you can request. The final
-        price and timeline are confirmed after we review your requirements.
+        Packages create a clear starting point. Final price and delivery time
+        are confirmed after project review.
       </p>
     </div>
 
-    <div class="services-map packages-grid">
+    <div class="package-grid">
 
       {% for package in packages %}
-      <article class="service-card polished-card package-card">
+      <article class="package-card">
 
-        <div class="service-number">
-          {{ "%02d"|format(loop.index) }}
+        <div class="package-card-top">
+          <span class="package-number">
+            {{ "%02d"|format(loop.index) }}
+          </span>
+
+          <span class="package-category">
+            {{ package.category }}
+          </span>
         </div>
-
-        <p class="section-kicker">
-          {{ package.category }}
-        </p>
 
         <h3>{{ package.name }}</h3>
 
@@ -134,7 +155,7 @@ FLAREN — Services
           {{ package.short_description }}
         </p>
 
-        <ul class="service-items">
+        <ul class="package-list">
           {% for item in package.includes %}
           <li>{{ item }}</li>
           {% endfor %}
@@ -163,65 +184,27 @@ FLAREN — Services
   <div class="container">
 
     <h2 class="section-title">
-      How we work
+      Need help choosing?
     </h2>
 
     <p class="section-text">
-      Simple, clear steps from your first idea to final delivery.
+      The Project Planner asks a few questions and recommends a practical
+      direction.
     </p>
 
-    <div class="steps-timeline">
-
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Share your idea</h3>
-        <p>
-          Tell us what you want to create, who it is for, and where it will be
-          used.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>We plan and confirm</h3>
-        <p>
-          We review your requirements and confirm the suitable approach,
-          timeline, and budget.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>We create the work</h3>
-        <p>
-          We create the design or website based on the confirmed project scope.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <h3>You receive the result</h3>
-        <p>
-          You receive the final digital files or website after the agreed
-          review process.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="actions centered-actions">
+    <div class="centered-actions">
       <a
         href="{{ url_for('work') }}"
-        class="btn btn-secondary"
+        class="btn btn-primary"
       >
         Use Project Planner
       </a>
 
       <a
-        href="{{ url_for('order') }}"
-        class="btn btn-primary"
+        href="{{ url_for('contact') }}"
+        class="btn btn-secondary"
       >
-        Start a Project
+        Ask a Question
       </a>
     </div>
 
