@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+FLAREN — Page Not Found
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-panel">
+
+      <p class="hero-kicker">404 ERROR</p>
+
+      <h1>
+        This page<br>
+        could not be found.
+      </h1>
+
+      <p class="hero-description">
+        The page may have moved, the link may be incorrect, or the address
+        may no longer exist.
+      </p>
+
+      <div class="actions">
+        <a
+          href="{{ url_for('home') }}"
+          class="btn btn-primary"
+        >
+          Go Home
+        </a>
+
+        <a
+          href="{{ url_for('contact') }}"
+          class="btn btn-secondary"
+        >
+          Contact FLAREN
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
