@@ -1,26 +1,58 @@
 {% extends "base.html" %}
-{% block title %}FLAREN — Order Received{% endblock %}
+
+{% block title %}
+FLAREN — Request Received
+{% endblock %}
 
 {% block content %}
+
 <section class="section">
   <div class="container">
-    <div class="success-popup show">
-      <div class="success-icon">✓</div>
-      <h3>Order Placed Successfully</h3>
-      <p>Thank you! Your order has been placed successfully.</p>
 
+    <div class="success-popup show">
+
+      <div class="success-icon">✓</div>
+
+      <p class="section-kicker">REQUEST RECEIVED</p>
+
+      <h1>Your project brief is with us.</h1>
+
+      <p>
+        Thank you for contacting FLAREN. We’ll review your details and contact
+        you to confirm the final scope, price, and delivery time.
+      </p>
+
+      {% if order_id %}
       <div class="order-id-box">
-        <span class="order-id-label">Project ID:</span>
+        <span class="order-id-label">Reference ID</span>
         <span class="order-id-value">{{ order_id }}</span>
       </div>
+      {% endif %}
 
-      <p class="success-notice">Please check your email for further details.</p>
+      <p class="success-notice">
+        Please keep your reference ID. Submitting this request does not
+        automatically confirm a final price or start date.
+      </p>
 
       <div class="actions">
-        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
-        <a href="{{ url_for('order') }}" class="btn btn-primary">Submit Another Order</a>
+        <a
+          href="{{ url_for('home') }}"
+          class="btn btn-secondary"
+        >
+          Back to Home
+        </a>
+
+        <a
+          href="{{ url_for('order') }}"
+          class="btn btn-primary"
+        >
+          Send Another Brief
+        </a>
       </div>
+
     </div>
+
   </div>
 </section>
+
 {% endblock %}
