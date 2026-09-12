@@ -3650,3 +3650,206 @@ a {
     padding: 24px;
   }
 }
+/* =========================================================
+   SERVICE EXAMPLES
+   ========================================================= */
+
+.service-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.service-example-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(45, 36, 17, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(45, 36, 17, 0.07);
+}
+
+.service-example-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.service-example-content {
+  padding: 22px;
+}
+
+.service-example-content h3 {
+  margin: 0 0 10px;
+  color: #2d2411;
+}
+
+.service-example-content p:not(.section-kicker) {
+  color: #59616d;
+  line-height: 1.65;
+}
+
+.service-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.price-old {
+  color: #898989;
+  font-size: 14px;
+  text-decoration: line-through;
+}
+
+.price-current {
+  color: #8a6c25;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+@media (max-width: 800px) {
+  .service-examples-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   PROJECT PLANNER MODAL
+   ========================================================= */
+
+.planner-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.planner-modal.is-visible {
+  display: flex;
+}
+
+.planner-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 17, 10, 0.68);
+  backdrop-filter: blur(4px);
+}
+
+.planner-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 620px);
+  max-height: min(720px, calc(100vh - 40px));
+  overflow-y: auto;
+  padding: 34px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  animation: plannerModalIn 180ms ease-out;
+}
+
+.planner-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #dedede;
+  border-radius: 50%;
+  color: #2d2411;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.planner-modal-close:hover {
+  background: #f4f1e8;
+}
+
+.planner-modal-card h2 {
+  margin: 0 0 14px;
+  color: #2d2411;
+}
+
+.planner-modal-reason {
+  color: #59616d;
+  line-height: 1.7;
+}
+
+.planner-modal-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.planner-modal-details div {
+  padding: 16px;
+  background: #f8f6f0;
+  border-radius: 10px;
+}
+
+.planner-modal-details span {
+  display: block;
+  margin-bottom: 7px;
+  color: #858b93;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.planner-modal-details strong {
+  color: #2d2411;
+}
+
+.planner-modal-next {
+  margin-bottom: 24px;
+  padding: 18px;
+  color: #66552b;
+  background: #fff8df;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.planner-modal-next p {
+  margin: 7px 0 0;
+}
+
+body.planner-modal-open {
+  overflow: hidden;
+}
+
+@keyframes plannerModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .planner-modal {
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .planner-modal-card {
+    padding: 28px 20px 22px;
+    border-radius: 16px 16px 10px 10px;
+  }
+
+  .planner-modal-details {
+    grid-template-columns: 1fr;
+  }
+}
