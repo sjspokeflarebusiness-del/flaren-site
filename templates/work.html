@@ -56,8 +56,8 @@ FLAREN — Project Planner
     </h2>
 
     <p class="section-text">
-      You do not need to know the exact service. Start with your goal and we
-      will help you choose the next step.
+      You do not need to know the exact service. Start with your goal and
+      FLAREN will help you choose the next step.
     </p>
 
     <form
@@ -169,67 +169,6 @@ FLAREN — Project Planner
   </div>
 </section>
 
-{% if recommendation %}
-<section class="section recommendation-section">
-  <div class="container">
-
-    <div class="recommendation-card">
-
-      <p class="section-kicker">
-        RECOMMENDED DIRECTION
-      </p>
-
-      <h2>
-        {{ recommendation.service }}
-      </h2>
-
-      <p>
-        {{ recommendation.reason }}
-      </p>
-
-      <div class="recommendation-details">
-
-        <div>
-          <span>Audience</span>
-          <strong>{{ recommendation.audience }}</strong>
-        </div>
-
-        <div>
-          <span>Timeframe</span>
-          <strong>{{ recommendation.deadline }}</strong>
-        </div>
-
-      </div>
-
-      <div class="recommendation-next">
-        <strong>What to prepare:</strong>
-        <p>
-          {{ recommendation.next_step }}
-        </p>
-      </div>
-
-      <div class="actions">
-        <a
-          href="{{ url_for('order') }}"
-          class="btn btn-primary"
-        >
-          Start This Project
-        </a>
-
-        <a
-          href="{{ url_for('contact') }}"
-          class="btn btn-secondary"
-        >
-          Ask a Question
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-{% endif %}
-
 <section class="section">
   <div class="container">
 
@@ -278,5 +217,187 @@ FLAREN — Project Planner
 
   </div>
 </section>
+
+<!-- Recommendation popup -->
+<div
+  class="planner-modal"
+  id="plannerModal"
+  aria-hidden="true"
+>
+  <div
+    class="planner-modal-backdrop"
+    data-close-planner
+  ></div>
+
+  <div
+    class="planner-modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="plannerModalTitle"
+  >
+    <button
+      type="button"
+      class="planner-modal-close"
+      id="plannerModalClose"
+      aria-label="Close recommendation"
+    >
+      ×
+    </button>
+
+    <p class="section-kicker">
+      RECOMMENDED DIRECTION
+    </p>
+
+    <h2 id="plannerModalTitle">
+      Your recommendation
+    </h2>
+
+    <p
+      id="plannerModalReason"
+      class="planner-modal-reason"
+    ></p>
+
+    <div class="planner-modal-details">
+      <div>
+        <span>Audience</span>
+        <strong id="plannerModalAudience"></strong>
+      </div>
+
+      <div>
+        <span>Timeframe</span>
+        <strong id="plannerModalDeadline"></strong>
+      </div>
+    </div>
+
+    <div class="planner-modal-next">
+      <strong>What to prepare:</strong>
+      <p id="plannerModalNextStep"></p>
+    </div>
+
+    <div class="actions">
+      <a
+        href="{{ url_for('order') }}"
+        class="btn btn-primary"
+      >
+        Start This Project
+      </a>
+
+      <a
+        href="{{ url_for('contact') }}"
+        class="btn btn-secondary"
+      >
+        Ask a Question
+      </a>
+    </div>
+
+  </div>
+</div>
+
+{% block scripts_extra %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("plannerForm");
+    const modal = document.getElementById("plannerModal");
+    const closeButton = document.getElementById("plannerModalClose");
+
+    const modalTitle = document.getElementById("plannerModalTitle");
+    const modalReason = document.getElementById("plannerModalReason");
+    const modalAudience = document.getElementById("plannerModalAudience");
+    const modalDeadline = document.getElementById("plannerModalDeadline");
+    const modalNextStep = document.getElementById("plannerModalNextStep");
+
+    if (!form || !modal) {
+      return;
+    }
+
+    function openModal(data) {
+      modalTitle.textContent = data.service || "FLAREN Custom";
+      modalReason.textContent = data.reason || "";
+      modalAudience.textContent = data.audience || "Not specified";
+      modalDeadline.textContent = data.deadline || "Not specified";
+      modalNextStep.textContent = data.next_step || "";
+
+      modal.classList.add("is-visible");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("planner-modal-open");
+
+      if (closeButton) {
+        closeButton.focus();
+      }
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-visible");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("planner-modal-open");
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const submitButton = form.querySelector(
+        "button[type='submit']"
+      );
+
+      const originalText = submitButton.textContent;
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Finding your direction...";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "Accept": "application/json"
+          },
+          body: new FormData(form)
+        });
+
+        if (!response.ok) {
+          throw new Error("Planner request failed");
+        }
+
+        const data = await response.json();
+        openModal(data);
+
+      } catch (error) {
+        console.error(error);
+
+        /*
+          Fallback if JavaScript request fails.
+          The normal server response will still work.
+        */
+        const fallbackForm = form.cloneNode(true);
+        form.replaceWith(fallbackForm);
+        fallbackForm.submit();
+
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener("click", closeModal);
+    }
+
+    document.querySelectorAll("[data-close-planner]").forEach(function (element) {
+      element.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
+  });
+</script>
+{% endblock %}
 
 {% endblock %}
