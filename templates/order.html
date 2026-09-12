@@ -14,22 +14,22 @@ FLAREN — Start a Project
         <p class="section-kicker">START A PROJECT</p>
 
         <h1 class="section-title">
-          Tell us what<br>
-          you want to create.
+          Send us your<br>
+          project brief.
         </h1>
       </div>
 
       <p class="section-heading-text">
-        Share your idea and requirements. We’ll review your request and
-        contact you to confirm the scope, price, and delivery time.
+        Tell us what you want to create. We’ll review the details and contact
+        you to confirm the best approach, final price, and delivery time.
       </p>
     </div>
 
     <div class="order-notice">
       <strong>No payment is required to submit this request.</strong>
+
       <span>
-        Final pricing and delivery timing are confirmed after we review
-        your project.
+        Submitting a request does not automatically confirm the project.
       </span>
     </div>
 
@@ -39,53 +39,60 @@ FLAREN — Start a Project
       action="{{ url_for('order') }}"
     >
 
-      <div class="form-row">
-        <div class="field">
-          <label for="service">What type of work do you need?</label>
+      <div class="form-progress">
+        <span>PROJECT BRIEF</span>
+        <span>Tell us enough to understand the idea.</span>
+      </div>
 
-          <select
-            id="service"
-            name="service"
-            required
-          >
-            <option value="" disabled selected>
-              Choose a service
-            </option>
+      <div class="field">
+        <label for="service">
+          What type of work do you need?
+        </label>
 
-            {% for service in services %}
-            <option value="{{ service }}">
-              {{ service }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+        <select
+          id="service"
+          name="service"
+          required
+        >
+          <option value="" disabled selected>
+            Choose a direction
+          </option>
 
-        <div class="field">
-          <label for="package">
-            Package, if you already know
-          </label>
+          {% for service in services %}
+          <option value="{{ service }}">
+            {{ service }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
 
-          <select
-            id="package"
-            name="package"
-          >
-            <option value="">
-              I’m not sure yet
-            </option>
+      <div class="field">
+        <label for="package">
+          Choose a package
+          <span class="field-note">(optional)</span>
+        </label>
 
-            {% for package in packages %}
-            <option value="{{ package.name }}">
-              {{ package.name }} — {{ package.category }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+        <select
+          id="package"
+          name="package"
+        >
+          <option value="">
+            I’m not sure yet
+          </option>
+
+          {% for package in packages %}
+          <option value="{{ package.name }}">
+            {{ package.name }}
+          </option>
+          {% endfor %}
+        </select>
       </div>
 
       <div class="form-row">
         <div class="field">
           <label for="budget">
-            Budget range in INR
+            Budget range
+            <span class="field-note">(optional)</span>
           </label>
 
           <input
@@ -100,6 +107,7 @@ FLAREN — Start a Project
         <div class="field">
           <label for="deadline">
             Deadline
+            <span class="field-note">(optional)</span>
           </label>
 
           <input
@@ -108,6 +116,62 @@ FLAREN — Start a Project
             name="deadline"
           >
         </div>
+      </div>
+
+      <div class="field">
+        <label for="description">
+          Describe your idea
+        </label>
+
+        <textarea
+          id="description"
+          name="description"
+          rows="7"
+          required
+          placeholder="What should we create? Who is it for? Where will it be used? What text, colours, style, or size should we know about?"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="referenceLink">
+          Reference link
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <input
+          type="url"
+          id="referenceLink"
+          name="referenceLink"
+          placeholder="Google Drive, Dropbox, Pinterest, or example link"
+        >
+      </div>
+
+      <div class="field">
+        <label for="referenceFile">
+          File link
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <input
+          type="url"
+          id="referenceFile"
+          name="referenceFile"
+          placeholder="Paste a shareable file link"
+        >
+      </div>
+
+      <div class="field">
+        <label for="additionalRequirements">
+          Additional requirements
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <textarea
+          id="additionalRequirements"
+          name="additionalRequirements"
+          rows="5"
+          placeholder="Mention formats, colours, fonts, revisions, integrations, or anything else."
+        ></textarea>
       </div>
 
       <div class="form-row">
@@ -154,76 +218,23 @@ FLAREN — Start a Project
         >
       </div>
 
-      <div class="field">
-        <label for="description">
-          Describe your idea
-        </label>
-
-        <textarea
-          id="description"
-          name="description"
-          rows="7"
-          required
-          placeholder="What should we create? Where will it be used? What text, content, colours, style, or size should we know about?"
-        ></textarea>
-      </div>
-
-      <div class="field">
-        <label for="referenceLink">
-          Reference link
-          <span class="field-note">(optional)</span>
-        </label>
-
-        <input
-          type="url"
-          id="referenceLink"
-          name="referenceLink"
-          placeholder="Google Drive, Dropbox, Pinterest, or example link"
-        >
-      </div>
-
-      <div class="field">
-        <label for="referenceFile">
-          Reference file link
-          <span class="field-note">(optional)</span>
-        </label>
-
-        <input
-          type="url"
-          id="referenceFile"
-          name="referenceFile"
-          placeholder="Paste a shareable file link if needed"
-        >
-      </div>
-
-      <div class="field">
-        <label for="additionalRequirements">
-          Additional requirements
-          <span class="field-note">(optional)</span>
-        </label>
-
-        <textarea
-          id="additionalRequirements"
-          name="additionalRequirements"
-          rows="5"
-          placeholder="Mention colours, fonts, formats, revisions, platform requirements, or anything else."
-        ></textarea>
-      </div>
-
       <div class="form-submit-area">
         <button
           type="submit"
           class="btn btn-primary"
         >
-          Send Project Request
+          Send Project Brief
         </button>
 
         <p class="form-help-text">
-          You can also
+          Not sure what to choose?
+          <a href="{{ url_for('work') }}">
+            Use the Project Planner
+          </a>
+          or
           <a href="{{ url_for('contact') }}">
             contact FLAREN
-          </a>
-          if you are not sure what to choose.
+          </a>.
         </p>
       </div>
 
