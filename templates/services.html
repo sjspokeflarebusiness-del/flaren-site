@@ -1,80 +1,231 @@
 {% extends "base.html" %}
-{% block title %}FLAREN — Services{% endblock %}
+
+{% block title %}
+FLAREN — Services
+{% endblock %}
 
 {% block content %}
-<!-- Hero -->
+
 <section class="hero">
   <div class="container">
     <div class="hero-panel">
-      <h1>Our Services</h1>
-      <p>
-        From posters and logos to simple websites and custom digital work —  
-        we help you turn ideas into clean, professional designs.
+
+      <p class="hero-kicker">WHAT WE CREATE</p>
+
+      <h1>
+        Services for ideas<br>
+        that need to move.
+      </h1>
+
+      <p class="hero-description">
+        FLAREN turns ideas into professional designs, websites, and digital
+        solutions for students, creators, events, and small businesses.
       </p>
+
       <div class="actions">
-        <a href="{{ url_for('order') }}" class="btn btn-primary">Start a Project</a>
-        <a href="{{ url_for('sample_works') }}" class="btn btn-secondary">See Sample Work</a>
+        <a
+          href="{{ url_for('order') }}"
+          class="btn btn-primary"
+        >
+          Start a Project
+        </a>
+
+        <a
+          href="{{ url_for('sample_works') }}"
+          class="btn btn-secondary"
+        >
+          See Sample Work
+        </a>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- Services List -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">What We Offer</h2>
-    <p class="section-text">
-      Browse our core services below. If you need something custom, just tell us in the order form.
-    </p>
+
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">FLAREN SERVICES</p>
+
+        <h2 class="section-title">
+          Choose a direction<br>
+          for your project.
+        </h2>
+      </div>
+
+      <p class="section-heading-text">
+        Start with the type of result you need. If you are unsure, use the
+        Project Planner or describe your idea in the order form.
+      </p>
+    </div>
 
     <div class="services-map">
+
       {% for category in service_categories %}
-      <div class="service-card">
-        <span class="service-number">{{ loop.index }}</span>
-        <h3>{{ service }}</h3>
-      </div>
+      <article class="service-card polished-card">
+
+        <div class="service-number">
+          {{ "%02d"|format(loop.index) }}
+        </div>
+
+        <h3>{{ category.title }}</h3>
+
+        <p>
+          {{ category.description }}
+        </p>
+
+        <ul class="service-items">
+          {% for item in category.items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <a
+          href="{{ url_for('order') }}"
+          class="text-link"
+        >
+          Start this type of project <span>→</span>
+        </a>
+
+      </article>
       {% endfor %}
+
     </div>
   </div>
 </section>
 
-<!-- How It Works (mini timeline) -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">How We Work</h2>
+
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">PACKAGES</p>
+
+        <h2 class="section-title">
+          Start with a clear<br>
+          project direction.
+        </h2>
+      </div>
+
+      <p class="section-heading-text">
+        Packages make it easier to understand what you can request. The final
+        price and timeline are confirmed after we review your requirements.
+      </p>
+    </div>
+
+    <div class="services-map packages-grid">
+
+      {% for package in packages %}
+      <article class="service-card polished-card package-card">
+
+        <div class="service-number">
+          {{ "%02d"|format(loop.index) }}
+        </div>
+
+        <p class="section-kicker">
+          {{ package.category }}
+        </p>
+
+        <h3>{{ package.name }}</h3>
+
+        <p>
+          {{ package.short_description }}
+        </p>
+
+        <ul class="service-items">
+          {% for item in package.includes %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <p class="package-price">
+          {{ package.price }}
+        </p>
+
+        <a
+          href="{{ url_for('order') }}"
+          class="text-link"
+        >
+          {{ package.cta }} <span>→</span>
+        </a>
+
+      </article>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <h2 class="section-title">
+      How we work
+    </h2>
+
     <p class="section-text">
-      Simple, clear steps from idea to final design.
+      Simple, clear steps from your first idea to final delivery.
     </p>
 
     <div class="steps-timeline">
+
       <div class="step-card">
         <div class="step-number">1</div>
-        <h3>You share your idea</h3>
-        <p>Tell us about your project, goals, and any references.</p>
+        <h3>Share your idea</h3>
+        <p>
+          Tell us what you want to create, who it is for, and where it will be
+          used.
+        </p>
       </div>
 
       <div class="step-card">
         <div class="step-number">2</div>
-        <h3>We plan & confirm</h3>
-        <p>We suggest approach, timeline, and budget, and confirm details.</p>
+        <h3>We plan and confirm</h3>
+        <p>
+          We review your requirements and confirm the suitable approach,
+          timeline, and budget.
+        </p>
       </div>
 
       <div class="step-card">
         <div class="step-number">3</div>
-        <h3>Design & revisions</h3>
-        <p>We create the design and share drafts for your feedback.</p>
+        <h3>We create the work</h3>
+        <p>
+          We create the design or website based on the confirmed project scope.
+        </p>
       </div>
 
       <div class="step-card">
         <div class="step-number">4</div>
-        <h3>Final delivery</h3>
-        <p>You get final files ready to use online or in print.</p>
+        <h3>You receive the result</h3>
+        <p>
+          You receive the final digital files or website after the agreed
+          review process.
+        </p>
       </div>
+
     </div>
 
-    <div style="text-align: center; margin-top: 26px;">
-      <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
+    <div class="actions centered-actions">
+      <a
+        href="{{ url_for('work') }}"
+        class="btn btn-secondary"
+      >
+        Use Project Planner
+      </a>
+
+      <a
+        href="{{ url_for('order') }}"
+        class="btn btn-primary"
+      >
+        Start a Project
+      </a>
     </div>
+
   </div>
 </section>
+
 {% endblock %}
