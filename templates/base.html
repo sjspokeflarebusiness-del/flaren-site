@@ -15,10 +15,22 @@
 
   <meta
     name="description"
-    content="FLAREN turns ideas into professional designs, websites, and digital solutions for students, creators, events, and small businesses."
+    content="FLAREN turns ideas into professional designs, websites, QR experiences, and digital solutions for students, creators, events, and small businesses."
   >
 
   <meta name="theme-color" content="#c49b3b">
+
+  <meta property="og:site_name" content="FLAREN Creative Studio">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FLAREN Creative Studio">
+  <meta
+    property="og:description"
+    content="Design, websites, QR experiences, and digital solutions for real projects."
+  >
+  <meta
+    property="og:image"
+    content="{{ url_for('static', filename='images/logo.png', _external=True) }}"
+  >
 
   <title>{% block title %}FLAREN Creative Studio{% endblock %}</title>
 
@@ -60,8 +72,9 @@
         aria-label="Desktop navigation"
       >
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('work') }}">Work</a>
+        <a href="{{ url_for('work') }}">Planner</a>
         <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('sample_works') }}">Work</a>
         <a href="{{ url_for('process') }}">Process</a>
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
@@ -93,8 +106,9 @@
         aria-hidden="true"
       >
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('work') }}">Work</a>
+        <a href="{{ url_for('work') }}">Planner</a>
         <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('sample_works') }}">Work</a>
         <a href="{{ url_for('process') }}">Process</a>
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
@@ -129,26 +143,23 @@
   <footer class="site-footer">
     <div class="container footer-inner">
 
-      <p>
-        © {{ current_year if current_year else "2026" }} FLAREN.
-        Creative work made simple.
-      </p>
+      <div>
+        <p class="footer-brand">FLAREN</p>
+        <p>
+          Design, websites, and digital solutions made practical.
+        </p>
+      </div>
 
       <div class="footer-links">
-        <a href="{{ url_for('contact') }}">
-          Contact FLAREN
-        </a>
-
-        <span class="footer-divider">•</span>
-
-        <a
-          href="#"
-          class="back-to-top"
-          onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
-        >
-          Back to top
-        </a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('sample_works') }}">Work</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('order') }}">Start a Project</a>
       </div>
+
+      <p class="footer-copyright">
+        © {{ current_year if current_year else "2026" }} FLAREN.
+      </p>
 
     </div>
   </footer>
