@@ -1,34 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}FLAREN — Find the Right Design{% endblock %}
+{% block title %}
+FLAREN — Project Planner
+{% endblock %}
 
 {% block content %}
 
 <section class="hero planner-hero">
   <div class="container">
     <div class="hero-panel">
-      <img
-        src="{{ url_for('static', filename='images/logo.png') }}"
-        alt="FLAREN logo"
-        class="hero-logo"
-      >
 
-      <h1>Find the right design solution</h1>
+      <p class="hero-kicker">PROJECT PLANNER</p>
 
-      <p>
-        Not sure which FLAREN service fits your idea? Answer three quick
-        questions and get a practical recommendation before placing your order.
+      <h1>
+        Start with<br>
+        your goal.
+      </h1>
+
+      <p class="hero-description">
+        Answer three quick questions and FLAREN will suggest a practical
+        direction for your project.
       </p>
 
       <div class="actions">
-        <a href="#project-planner" class="btn btn-primary">
-          Find My Service
+        <a
+          href="#project-planner"
+          class="btn btn-primary"
+        >
+          Find My Direction
         </a>
 
-        <a href="/services" class="btn btn-secondary">
-          View All Services
+        <a
+          href="{{ url_for('services') }}"
+          class="btn btn-secondary"
+        >
+          View Services
         </a>
       </div>
+
     </div>
   </div>
 </section>
@@ -39,11 +48,16 @@
 >
   <div class="container planner-container">
 
-    <h2 class="section-title">FLAREN Project Planner</h2>
+    <p class="section-kicker">THREE QUESTIONS</p>
+
+    <h2 class="section-title">
+      What are you<br>
+      trying to create?
+    </h2>
 
     <p class="section-text">
-      Tell us what you are trying to create. We will suggest the most suitable
-      service and explain what information to prepare.
+      You do not need to know the exact service. Start with your goal and we
+      will help you choose the next step.
     </p>
 
     <form
@@ -54,7 +68,9 @@
     >
 
       <div class="field">
-        <label for="goal">What are you creating?</label>
+        <label for="goal">
+          What are you creating?
+        </label>
 
         <select
           id="goal"
@@ -64,16 +80,33 @@
           <option value="" disabled selected>
             Select your project type
           </option>
-          <option value="event">An event or celebration</option>
-          <option value="business">A business or brand project</option>
-          <option value="school">A school or college project</option>
-          <option value="personal">A personal creative project</option>
-          <option value="website">A simple website</option>
+
+          <option value="event">
+            An event or celebration
+          </option>
+
+          <option value="business">
+            A business or brand project
+          </option>
+
+          <option value="school">
+            A school or college project
+          </option>
+
+          <option value="personal">
+            A personal creative project
+          </option>
+
+          <option value="website">
+            A simple website
+          </option>
         </select>
       </div>
 
       <div class="field">
-        <label for="audience">Who is it for?</label>
+        <label for="audience">
+          Who is it for?
+        </label>
 
         <select
           id="audience"
@@ -83,6 +116,7 @@
           <option value="" disabled selected>
             Select your audience
           </option>
+
           <option value="myself">Myself</option>
           <option value="students">Students or teachers</option>
           <option value="customers">Customers or clients</option>
@@ -92,7 +126,9 @@
       </div>
 
       <div class="field">
-        <label for="deadline">When do you need it?</label>
+        <label for="deadline">
+          When do you need it?
+        </label>
 
         <select
           id="deadline"
@@ -102,10 +138,22 @@
           <option value="" disabled selected>
             Select a timeframe
           </option>
-          <option value="urgent">As soon as possible</option>
-          <option value="one-week">Within one week</option>
-          <option value="two-weeks">Within two weeks</option>
-          <option value="flexible">I am flexible</option>
+
+          <option value="urgent">
+            As soon as possible
+          </option>
+
+          <option value="one-week">
+            Within one week
+          </option>
+
+          <option value="two-weeks">
+            Within two weeks
+          </option>
+
+          <option value="flexible">
+            I am flexible
+          </option>
         </select>
       </div>
 
@@ -122,99 +170,107 @@
 </section>
 
 {% if recommendation %}
-<div class="recommendation-overlay" id="recommendationOverlay">
-  <div class="recommendation-popup">
-    <button
-      class="recommendation-close"
-      id="recommendationClose"
-      type="button"
-      aria-label="Close recommendation"
-    >
-      ✕
-    </button>
-
-    <div class="recommendation-arrow recommendation-arrow-top"></div>
-    <div class="recommendation-arrow recommendation-arrow-bottom"></div>
-
-    <div class="recommendation-badge">
-      Recommended for you
-    </div>
-
-    <h2>{{ recommendation.service }}</h2>
-
-    <p>
-      {{ recommendation.reason }}
-    </p>
-
-    <div class="recommendation-details">
-      <div>
-        <span>Audience</span>
-        <strong>{{ recommendation.audience }}</strong>
-      </div>
-
-      <div>
-        <span>Timeframe</span>
-        <strong>{{ recommendation.deadline }}</strong>
-      </div>
-    </div>
-
-    <div class="recommendation-next">
-      <strong>What to prepare:</strong>
-      <p>{{ recommendation.next_step }}</p>
-    </div>
-
-    <div class="actions">
-      <a href="/order" class="btn btn-primary">
-        Start This Project
-      </a>
-
-      <a href="/contact" class="btn btn-secondary">
-        Ask a Question
-      </a>
-
-      <button
-        class="btn btn-secondary"
-        id="recommendationBack"
-        type="button"
-      >
-        Back
-      </button>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<section class="section planner-benefits-section">
+<section class="section recommendation-section">
   <div class="container">
 
-    <h2 class="section-title">Why use the planner?</h2>
+    <div class="recommendation-card">
+
+      <p class="section-kicker">
+        RECOMMENDED DIRECTION
+      </p>
+
+      <h2>
+        {{ recommendation.service }}
+      </h2>
+
+      <p>
+        {{ recommendation.reason }}
+      </p>
+
+      <div class="recommendation-details">
+
+        <div>
+          <span>Audience</span>
+          <strong>{{ recommendation.audience }}</strong>
+        </div>
+
+        <div>
+          <span>Timeframe</span>
+          <strong>{{ recommendation.deadline }}</strong>
+        </div>
+
+      </div>
+
+      <div class="recommendation-next">
+        <strong>What to prepare:</strong>
+        <p>
+          {{ recommendation.next_step }}
+        </p>
+      </div>
+
+      <div class="actions">
+        <a
+          href="{{ url_for('order') }}"
+          class="btn btn-primary"
+        >
+          Start This Project
+        </a>
+
+        <a
+          href="{{ url_for('contact') }}"
+          class="btn btn-secondary"
+        >
+          Ask a Question
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="container">
+
+    <p class="section-kicker">WHY USE THE PLANNER?</p>
+
+    <h2 class="section-title">
+      Start with the problem,<br>
+      not the design category.
+    </h2>
 
     <div class="services-map">
 
-      <div class="service-card">
+      <div class="service-card polished-card">
         <div class="service-number">01</div>
-        <h3>No confusing service list</h3>
+
+        <h3>Less confusion</h3>
+
         <p>
-          Start with your goal instead of trying to understand every design
-          category.
+          Start with your goal instead of trying to understand every service
+          name.
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card polished-card">
         <div class="service-number">02</div>
-        <h3>Better project conversations</h3>
+
+        <h3>Better project details</h3>
+
         <p>
-          Arrive with a clearer idea of what you need and what information to
-          share.
+          Prepare useful information before submitting your project request.
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card polished-card">
         <div class="service-number">03</div>
-        <h3>Built for real people</h3>
+
+        <h3>Designed for real people</h3>
+
         <p>
-          The planner works for students, creators, families, and small
-          businesses.
+          The planner works for students, creators, families, events, and
+          small businesses.
         </p>
       </div>
 
@@ -222,44 +278,5 @@
 
   </div>
 </section>
-
-<script>
-  const overlay = document.getElementById("recommendationOverlay");
-  const closeBtn = document.getElementById("recommendationClose");
-  const backBtn = document.getElementById("recommendationBack");
-  const form = document.getElementById("plannerForm");
-
-  function hideRecommendation() {
-    if (!overlay) return;
-    overlay.classList.remove("show");
-    // Optional: remove from DOM after animation
-    setTimeout(() => {
-      if (overlay) overlay.style.display = "none";
-    }, 400);
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", hideRecommendation);
-  }
-
-  if (backBtn) {
-    backBtn.addEventListener("click", () => {
-      hideRecommendation();
-      if (form) {
-        form.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
-  }
-
-  // Auto-show on load if recommendation exists (server-side rendered)
-  if (overlay) {
-    // Ensure it's visible in DOM
-    overlay.style.display = "flex";
-    // Trigger animation
-    requestAnimationFrame(() => {
-      overlay.classList.add("show");
-    });
-  }
-</script>
 
 {% endblock %}
