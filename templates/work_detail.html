@@ -10,10 +10,10 @@ FLAREN — {{ work.title }}
   <div class="container">
 
     <a
-      href="{{ url_for('home') }}"
+      href="{{ url_for('sample_works') }}"
       class="back-link"
     >
-      ← Back to sample works
+      ← Back to selected work
     </a>
 
     <div class="work-detail-card">
@@ -37,11 +37,13 @@ FLAREN — {{ work.title }}
           {{ work.desc }}
         </p>
 
-        <p class="work-detail-details">
-          {{ work.details }}
-        </p>
+        <div class="case-study-grid">
 
-        <div class="work-detail-facts">
+          <div>
+            <span>Project type</span>
+            <strong>{{ work.project_type }}</strong>
+          </div>
+
           <div>
             <span>Starting price</span>
             <strong>{{ work.price }}</strong>
@@ -51,12 +53,33 @@ FLAREN — {{ work.title }}
             <span>Typical delivery</span>
             <strong>{{ work.delivery }}</strong>
           </div>
+
+        </div>
+
+        <div class="case-study-block">
+          <p class="case-study-label">DETAILS</p>
+          <p>{{ work.details }}</p>
+        </div>
+
+        <div class="case-study-block">
+          <p class="case-study-label">CHALLENGE</p>
+          <p>{{ work.challenge }}</p>
+        </div>
+
+        <div class="case-study-block">
+          <p class="case-study-label">SOLUTION</p>
+          <p>{{ work.solution }}</p>
         </div>
 
         <div class="work-detail-note">
-          <strong>Note:</strong>
-          Final pricing depends on the exact content, size, number of pages,
-          revisions, and delivery requirements.
+          <strong>Important:</strong>
+          {% if work.project_type == "Concept project" %}
+            This is a concept example created to demonstrate FLAREN’s
+            capabilities.
+          {% else %}
+            Final pricing depends on the exact content, size, revisions, and
+            delivery requirements.
+          {% endif %}
         </div>
 
         <div class="actions work-detail-actions">
@@ -64,7 +87,7 @@ FLAREN — {{ work.title }}
             href="{{ url_for('order') }}"
             class="btn btn-primary"
           >
-            Order This Service
+            Start a Project
           </a>
 
           <a
@@ -78,6 +101,7 @@ FLAREN — {{ work.title }}
       </div>
 
     </div>
+
   </div>
 </section>
 
