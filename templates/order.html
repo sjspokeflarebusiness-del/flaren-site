@@ -1,78 +1,235 @@
 {% extends "base.html" %}
-{% block title %}FLAREN — Order{% endblock %}
+
+{% block title %}
+FLAREN — Start a Project
+{% endblock %}
 
 {% block content %}
-<section class="section">
+
+<section class="section order-page-section">
   <div class="container">
-    <h2 class="section-title">Order Now</h2>
-    <p class="section-text">
-      Ready to start your project? Fill out the form below and we’ll get back to you shortly.
-    </p>
-    <form class="order-form" method="POST">
-      
-      <!-- Budget + Service -->
+
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">START A PROJECT</p>
+
+        <h1 class="section-title">
+          Tell us what<br>
+          you want to create.
+        </h1>
+      </div>
+
+      <p class="section-heading-text">
+        Share your idea and requirements. We’ll review your request and
+        contact you to confirm the scope, price, and delivery time.
+      </p>
+    </div>
+
+    <div class="order-notice">
+      <strong>No payment is required to submit this request.</strong>
+      <span>
+        Final pricing and delivery timing are confirmed after we review
+        your project.
+      </span>
+    </div>
+
+    <form
+      class="order-form"
+      method="POST"
+      action="{{ url_for('order') }}"
+    >
+
       <div class="form-row">
         <div class="field">
-          <label for="budget">Budget (INR)</label>
-          <input type="number" id="budget" name="budget" min="0" placeholder="e.g. 2000">
-        </div>
-        <div class="field">
-          <label for="service">Service</label>
-          <select id="service" name="service" required>
-            <option value="" disabled selected>Choose a service</option>
+          <label for="service">What type of work do you need?</label>
+
+          <select
+            id="service"
+            name="service"
+            required
+          >
+            <option value="" disabled selected>
+              Choose a service
+            </option>
+
             {% for service in services %}
-            <option value="{{ service }}">{{ service }}</option>
+            <option value="{{ service }}">
+              {{ service }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="package">
+            Package, if you already know
+          </label>
+
+          <select
+            id="package"
+            name="package"
+          >
+            <option value="">
+              I’m not sure yet
+            </option>
+
+            {% for package in packages %}
+            <option value="{{ package.name }}">
+              {{ package.name }} — {{ package.category }}
+            </option>
             {% endfor %}
           </select>
         </div>
       </div>
 
-      <!-- Name + Email -->
       <div class="form-row">
         <div class="field">
-          <label for="customerName">Full Name</label>
-          <input type="text" id="customerName" name="customerName" required>
+          <label for="budget">
+            Budget range in INR
+          </label>
+
+          <input
+            type="text"
+            id="budget"
+            name="budget"
+            placeholder="Example: ₹500–₹2,000"
+            autocomplete="off"
+          >
         </div>
+
         <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+          <label for="deadline">
+            Deadline
+          </label>
+
+          <input
+            type="date"
+            id="deadline"
+            name="deadline"
+          >
         </div>
       </div>
 
-      <!-- Phone -->
       <div class="form-row">
         <div class="field">
-          <label for="phone">Phone / WhatsApp</label>
-          <input type="tel" id="phone" name="phone" required>
+          <label for="customerName">
+            Full name
+          </label>
+
+          <input
+            type="text"
+            id="customerName"
+            name="customerName"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="email">
+            Email address
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          >
         </div>
       </div>
 
-      <!-- Description -->
       <div class="field">
-        <label for="description">Project Description</label>
-        <textarea id="description" name="description" required placeholder="Describe your project in detail..."></textarea>
+        <label for="phone">
+          Phone or WhatsApp number
+        </label>
+
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          autocomplete="tel"
+          required
+        >
       </div>
 
-      <!-- Deadline + Reference Link -->
-      <div class="form-row">
-        <div class="field">
-          <label for="deadline">Deadline (Optional)</label>
-          <input type="date" id="deadline" name="deadline">
-        </div>
-        <div class="field">
-          <label for="referenceLink">Reference Link (Optional)</label>
-          <input type="url" id="referenceLink" name="referenceLink" placeholder="https://drive.google.com/... or Dropbox link">
-        </div>
-      </div>
-
-      <!-- Additional Requirements -->
       <div class="field">
-        <label for="additionalRequirements">Additional Requirements (Optional)</label>
-        <textarea id="additionalRequirements" name="additionalRequirements" placeholder="Any specific colors, fonts, or other details?"></textarea>
+        <label for="description">
+          Describe your idea
+        </label>
+
+        <textarea
+          id="description"
+          name="description"
+          rows="7"
+          required
+          placeholder="What should we create? Where will it be used? What text, content, colours, style, or size should we know about?"
+        ></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit Order</button>
+      <div class="field">
+        <label for="referenceLink">
+          Reference link
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <input
+          type="url"
+          id="referenceLink"
+          name="referenceLink"
+          placeholder="Google Drive, Dropbox, Pinterest, or example link"
+        >
+      </div>
+
+      <div class="field">
+        <label for="referenceFile">
+          Reference file link
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <input
+          type="url"
+          id="referenceFile"
+          name="referenceFile"
+          placeholder="Paste a shareable file link if needed"
+        >
+      </div>
+
+      <div class="field">
+        <label for="additionalRequirements">
+          Additional requirements
+          <span class="field-note">(optional)</span>
+        </label>
+
+        <textarea
+          id="additionalRequirements"
+          name="additionalRequirements"
+          rows="5"
+          placeholder="Mention colours, fonts, formats, revisions, platform requirements, or anything else."
+        ></textarea>
+      </div>
+
+      <div class="form-submit-area">
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Send Project Request
+        </button>
+
+        <p class="form-help-text">
+          You can also
+          <a href="{{ url_for('contact') }}">
+            contact FLAREN
+          </a>
+          if you are not sure what to choose.
+        </p>
+      </div>
+
     </form>
+
   </div>
 </section>
+
 {% endblock %}
