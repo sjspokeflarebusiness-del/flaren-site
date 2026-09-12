@@ -1,92 +1,94 @@
 {% extends "base.html" %}
-{% block title %}FLAREN — How It Works{% endblock %}
+
+{% block title %}
+FLAREN — How It Works
+{% endblock %}
 
 {% block content %}
-<!-- Hero -->
+
 <section class="hero">
   <div class="container">
     <div class="hero-panel">
-      <h1>How It Works</h1>
-      <p>
-        Simple, transparent steps from your first message to final delivery.  
-        No confusion, no surprises.
+
+      <p class="hero-kicker">HOW IT WORKS</p>
+
+      <h1>
+        Simple steps.<br>
+        Clear communication.
+      </h1>
+
+      <p class="hero-description">
+        You bring the idea. FLAREN helps shape it into a practical digital
+        result.
       </p>
+
       <div class="actions">
-        <a href="{{ url_for('order') }}" class="btn btn-primary">Start Your Project</a>
-        <a href="{{ url_for('services') }}" class="btn btn-secondary">View Services</a>
+        <a
+          href="{{ url_for('order') }}"
+          class="btn btn-primary"
+        >
+          Start Your Project
+        </a>
+
+        <a
+          href="{{ url_for('services') }}"
+          class="btn btn-secondary"
+        >
+          View Services
+        </a>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- Timeline -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">Our Process</h2>
-    <p class="section-text">
-      Here’s what happens after you reach out.
-    </p>
 
-    <div class="process-timeline">
-      <div class="process-step">
-        <div class="process-step-marker">1</div>
-        <div class="process-step-box">
-          <h3>You send your idea</h3>
-          <p>
-            Use the order or contact form to tell us about your project:  
-            what you need, your goals, deadline, and any references.
-          </p>
-        </div>
+    <h2 class="section-title">
+      What happens after you contact us?
+    </h2>
+
+    <div class="services-map">
+
+      <div class="service-card polished-card">
+        <div class="service-number">01</div>
+        <h3>You send your idea</h3>
+        <p>
+          Tell us what you need, your goal, deadline, references, and preferred
+          direction.
+        </p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-marker">2</div>
-        <div class="process-step-box">
-          <h3>We review & reply</h3>
-          <p>
-            We study your requirements and get back with questions (if any),  
-            a suggested approach, timeline, and budget.
-          </p>
-        </div>
+      <div class="service-card polished-card">
+        <div class="service-number">02</div>
+        <h3>We review and reply</h3>
+        <p>
+          We review the brief and ask focused questions if more information is
+          needed.
+        </p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-marker">3</div>
-        <div class="process-step-box">
-          <h3>Confirm & start</h3>
-          <p>
-            Once you confirm, we start the work and keep you updated  
-            at key points. You can share feedback anytime.
-          </p>
-        </div>
+      <div class="service-card polished-card">
+        <div class="service-number">03</div>
+        <h3>We confirm the project</h3>
+        <p>
+          We confirm the scope, price, timeline, and expected revision process.
+        </p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-marker">4</div>
-        <div class="process-step-box">
-          <h3>Drafts & revisions</h3>
-          <p>
-            We share initial designs. You suggest changes.  
-            We refine until it matches your vision.
-          </p>
-        </div>
+      <div class="service-card polished-card">
+        <div class="service-number">04</div>
+        <h3>We create and deliver</h3>
+        <p>
+          We create the agreed work, review it with you, and deliver the final
+          result digitally.
+        </p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-marker">5</div>
-        <div class="process-step-box">
-          <h3>Final delivery</h3>
-          <p>
-            You receive final files in the right formats, ready to use  
-            online, in print, or in your project.
-          </p>
-        </div>
-      </div>
     </div>
 
-    <div style="text-align: center; margin-top: 28px;">
-      <a href="{{ url_for('order') }}" class="btn btn-primary">Order Now</a>
-    </div>
   </div>
 </section>
+
 {% endblock %}
