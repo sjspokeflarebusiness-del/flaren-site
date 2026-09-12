@@ -1,6 +1,7 @@
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from flask import request, render_template
 from html import escape
 import os
 import random
