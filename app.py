@@ -874,26 +874,110 @@ def work():
     )
 
 
-@app.route("/work/<slug>")
-def work_detail(slug):
-    selected_work = next(
-        (
-            work_item
-            for work_item in SAMPLE_WORKS
-            if work_item["key"] == slug
-        ),
-        None,
-    )
+@app.route("/work", methods=["GET", "POST"])
+def work():
+    recommendation = None
 
-    if selected_work is None:
-        return render_template(
-            "404.html"
-        ), 404
+    recommendations = {
+        "event": {
+            "service": "Posters, Advertisements, or Invitations",
+            "reason": (
+                "These services are suitable for promoting an event "
+                "or sharing event details clearly."
+            ),
+            "next_step": (
+                "Prepare the event name, date, venue, theme, colours, "
+                "and required size."
+            ),
+        },
+        "business": {
+            "service": (
+                "FLAREN Starter, FLAREN Promote, FLAREN Digital, "
+                "FLAREN Brand, or a custom business project"
+            ),
+            "reason": (
+                "These options can help your business look more "
+                "professional and communicate its offer."
+            ),
+            "next_step": (
+                "Prepare your business name, audience, services, "
+                "preferred style, and deadline."
+            ),
+        },
+        "school": {
+            "service": (
+                "School Project Design or Presentation Design"
+            ),
+            "reason": (
+                "These services help organize information into "
+                "a polished academic project."
+            ),
+            "next_step": (
+                "Prepare the topic, number of pages or slides, "
+                "instructions, and submission date."
+            ),
+        },
+        "personal": {
+            "service": (
+                "Wallpaper, Invitation, Portfolio, or "
+                "Custom Digital Work"
+            ),
+            "reason": (
+                "These services can be adapted for personal events, "
+                "gifts, profiles, and creative ideas."
+            ),
+            "next_step": (
+                "Prepare your idea, preferred colours, reference "
+                "images, and final size."
+            ),
+        },
+        "website": {
+            "service": (
+                "FLAREN Digital or Website Studio"
+            ),
+            "reason": (
+                "A simple website can present your work, services, "
+                "contact information, or personal profile online."
+            ),
+            "next_step": (
+                "Prepare the website purpose, required pages, "
+                "examples you like, and deadline."
+            ),
+        },
+    }
+
+    if request.method == "POST":
+        goal = clean(request.form.get("goal"))
+        audience = clean(request.form.get("audience"))
+        deadline = clean(request.form.get("deadline"))
+
+        recommendation = recommendations.get(
+            goal,
+            {
+                "service": "FLAREN Custom",
+                "reason": (
+                    "Your project may need a custom solution based "
+                    "on its exact requirements."
+                ),
+                "next_step": (
+                    "Tell us your idea, preferred style, audience, "
+                    "and deadline."
+                ),
+            },
+        ).copy()
+
+        recommendation["goal"] = goal
+        recommendation["audience"] = audience
+        recommendation["deadline"] = deadline
+
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return recommendation
 
     return render_template(
-        "work_detail.html",
-        work=selected_work,
-        sample_works=SAMPLE_WORKS,
+        "work.html",
+        recommendation=recommendation,
+        packages=PACKAGES,
+        service_categories=SERVICE_CATEGORIES,
     )
 
 
