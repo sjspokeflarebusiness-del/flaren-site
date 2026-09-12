@@ -1,7 +1,6 @@
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from flask import request, render_template
 from html import escape
 import os
 import random
@@ -49,8 +48,6 @@ OWNER_PHONE = os.getenv(
     "8838969397",
 )
 
-# Add this value in Render Environment Variables.
-# Do not place the real webhook URL directly in public source code.
 APPS_SCRIPT_WEBHOOK_URL = os.getenv(
     "APPS_SCRIPT_WEBHOOK_URL",
     "",
@@ -371,9 +368,7 @@ SAMPLE_WORKS = [
     {
         "key": "logo",
         "title": "FLAREN Logo Design",
-        "desc": (
-            "A bold visual identity created for the FLAREN brand."
-        ),
+        "desc": "A bold visual identity created for the FLAREN brand.",
         "image": "logo.png",
         "price": "₹499",
         "category": "Branding",
@@ -395,9 +390,7 @@ SAMPLE_WORKS = [
     {
         "key": "personal_portfolio",
         "title": "Personal Portfolio Design",
-        "desc": (
-            "A polished visual portfolio for personal creative work."
-        ),
+        "desc": "A polished visual portfolio for personal creative work.",
         "image": "portfolio-1.png",
         "price": "₹499",
         "category": "Portfolio Design",
@@ -444,9 +437,7 @@ SAMPLE_WORKS = [
     {
         "key": "digital_images",
         "title": "Digital Social Media Design",
-        "desc": (
-            "Digital artwork, banners, and social-media graphics."
-        ),
+        "desc": "Digital artwork, banners, and social-media graphics.",
         "image": "portfolio-3.png",
         "price": "₹299",
         "category": "Digital Design",
@@ -548,12 +539,10 @@ SAMPLE_WORKS = [
 # ============================================================
 
 def clean(value):
-    """Return a trimmed string."""
     return (value or "").strip()
 
 
 def html_text(value):
-    """Escape text before placing it inside an HTML email."""
     return escape(clean(value)).replace("\n", "<br>")
 
 
@@ -577,7 +566,6 @@ def generate_contact_id():
 
 
 def send_to_sheets(payload):
-    """Send order/contact data to Google Apps Script."""
     if not APPS_SCRIPT_WEBHOOK_URL:
         app.logger.warning(
             "APPS_SCRIPT_WEBHOOK_URL is not configured."
@@ -626,7 +614,6 @@ def send_to_sheets(payload):
 
 
 def send_email(recipient_email, subject, body_html):
-    """Send an HTML email using SMTP."""
     if not recipient_email:
         return False
 
@@ -696,16 +683,13 @@ def inject_global_template_values():
 
 
 # ============================================================
-# STATIC AND SEO FILES
+# STATIC AND SEO ROUTES
 # ============================================================
 
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(
-        os.path.join(
-            app.root_path,
-            "static",
-        ),
+        os.path.join(app.root_path, "static"),
         "favicon.ico",
         mimetype="image/vnd.microsoft.icon",
     )
@@ -714,10 +698,7 @@ def favicon():
 @app.route("/robots.txt")
 def robots_txt():
     return send_from_directory(
-        os.path.join(
-            app.root_path,
-            "static",
-        ),
+        os.path.join(app.root_path, "static"),
         "robots.txt",
         mimetype="text/plain",
     )
@@ -726,10 +707,7 @@ def robots_txt():
 @app.route("/sitemap.xml")
 def sitemap_xml():
     return send_from_directory(
-        os.path.join(
-            app.root_path,
-            "static",
-        ),
+        os.path.join(app.root_path, "static"),
         "sitemap.xml",
         mimetype="application/xml",
     )
@@ -748,7 +726,7 @@ def health():
 
 
 # ============================================================
-# HOME AND WORK
+# HOME AND PORTFOLIO
 # ============================================================
 
 @app.route("/")
@@ -769,111 +747,30 @@ def sample_works():
     )
 
 
-@app.route("/work", methods=["GET", "POST"])
-def work():
-    recommendation = None
-
-    if request.method == "POST":
-        goal = clean(request.form.get("goal"))
-        audience = clean(request.form.get("audience"))
-        deadline = clean(request.form.get("deadline"))
-
-        recommendations = {
-            "event": {
-                "service": (
-                    "Posters, Advertisements, or Invitations"
-                ),
-                "reason": (
-                    "These services are suitable for promoting an "
-                    "event or sharing event details clearly."
-                ),
-                "next_step": (
-                    "Prepare the event name, date, venue, theme, "
-                    "colours, and required size."
-                ),
-            },
-            "business": {
-                "service": (
-                    "FLAREN Starter, FLAREN Promote, FLAREN Digital, "
-                    "FLAREN Brand, or a custom business project"
-                ),
-                "reason": (
-                    "These options can help your business look more "
-                    "professional and communicate its offer."
-                ),
-                "next_step": (
-                    "Prepare your business name, audience, services, "
-                    "preferred style, and deadline."
-                ),
-            },
-            "school": {
-                "service": (
-                    "School Project Design or Presentation Design"
-                ),
-                "reason": (
-                    "These services help organize information into "
-                    "a polished academic project."
-                ),
-                "next_step": (
-                    "Prepare the topic, number of pages or slides, "
-                    "instructions, and submission date."
-                ),
-            },
-            "personal": {
-                "service": (
-                    "Wallpaper, Invitation, Portfolio, or "
-                    "Custom Digital Work"
-                ),
-                "reason": (
-                    "These services can be adapted for personal "
-                    "events, gifts, profiles, and creative ideas."
-                ),
-                "next_step": (
-                    "Prepare your idea, preferred colours, reference "
-                    "images, and final size."
-                ),
-            },
-            "website": {
-                "service": (
-                    "FLAREN Digital or Website Studio"
-                ),
-                "reason": (
-                    "A simple website can present your work, services, "
-                    "contact information, or personal profile online."
-                ),
-                "next_step": (
-                    "Prepare the website purpose, required pages, "
-                    "examples you like, and deadline."
-                ),
-            },
-        }
-
-        recommendation = recommendations.get(
-            goal,
-            {
-                "service": "FLAREN Custom",
-                "reason": (
-                    "Your project may need a custom solution based "
-                    "on its exact requirements."
-                ),
-                "next_step": (
-                    "Tell us your idea, preferred style, audience, "
-                    "and deadline."
-                ),
-            },
-        ).copy()
-
-        recommendation["goal"] = goal
-        recommendation["audience"] = audience
-        recommendation["deadline"] = deadline
-
-    return render_template(
-        "work.html",
-        recommendation=recommendation,
-        packages=PACKAGES,
-        service_categories=SERVICE_CATEGORIES,
+@app.route("/work/<slug>")
+def work_detail(slug):
+    selected_work = next(
+        (
+            work_item
+            for work_item in SAMPLE_WORKS
+            if work_item["key"] == slug
+        ),
+        None,
     )
 
+    if selected_work is None:
+        return render_template("404.html"), 404
+
+    return render_template(
+        "work_detail.html",
+        work=selected_work,
+        sample_works=SAMPLE_WORKS,
+    )
+
+
+# ============================================================
+# PROJECT PLANNER
+# ============================================================
 
 @app.route("/work", methods=["GET", "POST"])
 def work():
@@ -933,9 +830,7 @@ def work():
             ),
         },
         "website": {
-            "service": (
-                "FLAREN Digital or Website Studio"
-            ),
+            "service": "FLAREN Digital or Website Studio",
             "reason": (
                 "A simple website can present your work, services, "
                 "contact information, or personal profile online."
@@ -971,7 +866,9 @@ def work():
         recommendation["audience"] = audience
         recommendation["deadline"] = deadline
 
-        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        if request.headers.get(
+            "X-Requested-With"
+        ) == "XMLHttpRequest":
             return recommendation
 
     return render_template(
@@ -1028,15 +925,9 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = clean(
-            request.form.get("contactName")
-        )
-        email = clean(
-            request.form.get("contactEmail")
-        )
-        message = clean(
-            request.form.get("contactMessage")
-        )
+        name = clean(request.form.get("contactName"))
+        email = clean(request.form.get("contactEmail"))
+        message = clean(request.form.get("contactMessage"))
 
         if not name or not email or not message:
             flash(
@@ -1058,10 +949,6 @@ def contact():
         }
 
         sheets_sent = send_to_sheets(contact_data)
-
-        owner_subject = (
-            f"FLAREN — New Contact Message: {contact_id}"
-        )
 
         owner_body_html = f"""
         <html>
@@ -1093,12 +980,8 @@ def contact():
 
         owner_email_sent = send_email(
             OWNER_EMAIL,
-            owner_subject,
+            f"FLAREN — New Contact: {contact_id}",
             owner_body_html,
-        )
-
-        customer_subject = (
-            f"FLAREN — Message Received: {contact_id}"
         )
 
         customer_body_html = f"""
@@ -1132,7 +1015,7 @@ def contact():
 
         customer_email_sent = send_email(
             email,
-            customer_subject,
+            f"FLAREN — Message Received: {contact_id}",
             customer_body_html,
         )
 
@@ -1153,9 +1036,7 @@ def contact():
                 "error",
             )
 
-        return redirect(
-            url_for("contact")
-        )
+        return redirect(url_for("contact"))
 
     return render_template(
         "contact.html",
@@ -1214,33 +1095,33 @@ def order():
             "status": "New",
         }
 
-        if not order_data["customer_name"]:
-            flash(
+        required_fields = [
+            (
+                "customer_name",
                 "Please enter your name.",
-                "error",
-            )
-            return redirect(url_for("order"))
-
-        if not order_data["email"]:
-            flash(
+            ),
+            (
+                "email",
                 "Please enter your email.",
-                "error",
-            )
-            return redirect(url_for("order"))
-
-        if not order_data["phone"]:
-            flash(
+            ),
+            (
+                "phone",
                 "Please enter your phone or WhatsApp number.",
-                "error",
-            )
-            return redirect(url_for("order"))
-
-        if not order_data["service"]:
-            flash(
+            ),
+            (
+                "service",
                 "Please choose a service.",
-                "error",
-            )
-            return redirect(url_for("order"))
+            ),
+            (
+                "description",
+                "Please describe your project.",
+            ),
+        ]
+
+        for field_name, error_message in required_fields:
+            if not order_data[field_name]:
+                flash(error_message, "error")
+                return redirect(url_for("order"))
 
         if not selected_service_exists(
             order_data["service"]
@@ -1251,18 +1132,7 @@ def order():
             )
             return redirect(url_for("order"))
 
-        if not order_data["description"]:
-            flash(
-                "Please describe your project.",
-                "error",
-            )
-            return redirect(url_for("order"))
-
         sheets_sent = send_to_sheets(order_data)
-
-        owner_subject = (
-            f"FLAREN — New Order: {order_id}"
-        )
 
         owner_body_html = f"""
         <html>
@@ -1281,51 +1151,37 @@ def order():
 
             <p>
               <strong>Customer:</strong>
-              {html_text(
-                  order_data["customer_name"]
-              )}
+              {html_text(order_data["customer_name"])}
             </p>
 
             <p>
               <strong>Email:</strong>
-              {html_text(
-                  order_data["email"]
-              )}
+              {html_text(order_data["email"])}
             </p>
 
             <p>
               <strong>Phone:</strong>
-              {html_text(
-                  order_data["phone"]
-              )}
+              {html_text(order_data["phone"])}
             </p>
 
             <p>
               <strong>Service:</strong>
-              {html_text(
-                  order_data["service"]
-              )}
+              {html_text(order_data["service"])}
             </p>
 
             <p>
               <strong>Package:</strong>
-              {html_text(
-                  order_data["package"]
-              ) or "Not specified"}
+              {html_text(order_data["package"]) or "Not specified"}
             </p>
 
             <p>
               <strong>Budget:</strong>
-              {html_text(
-                  order_data["budget"]
-              ) or "Not specified"}
+              {html_text(order_data["budget"]) or "Not specified"}
             </p>
 
             <p>
               <strong>Deadline:</strong>
-              {html_text(
-                  order_data["deadline"]
-              ) or "Not specified"}
+              {html_text(order_data["deadline"]) or "Not specified"}
             </p>
 
             <p>
@@ -1344,21 +1200,14 @@ def order():
 
             <p>
               <strong>Description:</strong><br>
-              {html_text(
-                  order_data["description"]
-              )}
+              {html_text(order_data["description"])}
             </p>
 
             <p>
               <strong>Additional requirements:</strong><br>
-              {
-                  html_text(
-                      order_data[
-                          "additional_requirements"
-                      ]
-                  )
-                  or "None"
-              }
+              {html_text(
+                  order_data["additional_requirements"]
+              ) or "None"}
             </p>
 
             <p>
@@ -1371,12 +1220,8 @@ def order():
 
         owner_email_sent = send_email(
             OWNER_EMAIL,
-            owner_subject,
+            f"FLAREN — New Order: {order_id}",
             owner_body_html,
-        )
-
-        customer_subject = (
-            f"FLAREN — Project Request Received: {order_id}"
         )
 
         customer_body_html = f"""
@@ -1385,9 +1230,7 @@ def order():
             <h2>FLAREN Project Request Received</h2>
 
             <p>
-              Hi {html_text(
-                  order_data["customer_name"]
-              )},
+              Hi {html_text(order_data["customer_name"])},
             </p>
 
             <p>
@@ -1402,9 +1245,7 @@ def order():
 
             <p>
               <strong>Service:</strong>
-              {html_text(
-                  order_data["service"]
-              )}
+              {html_text(order_data["service"])}
             </p>
 
             <p>
@@ -1424,7 +1265,7 @@ def order():
 
         customer_email_sent = send_email(
             order_data["email"],
-            customer_subject,
+            f"FLAREN — Project Request Received: {order_id}",
             customer_body_html,
         )
 
@@ -1477,9 +1318,7 @@ def order_success():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template(
-        "404.html"
-    ), 404
+    return render_template("404.html"), 404
 
 
 @app.errorhandler(500)
@@ -1489,9 +1328,7 @@ def internal_server_error(error):
         error,
     )
 
-    return render_template(
-        "500.html"
-    ), 500
+    return render_template("500.html"), 500
 
 
 # ============================================================
