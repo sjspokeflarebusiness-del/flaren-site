@@ -8,7 +8,6 @@
     content="width=device-width, initial-scale=1"
   >
 
-  <!-- Google Search Console ownership verification -->
   <meta
     name="google-site-verification"
     content="M3ZficrQoJMgJ5kCP6wnHb_sLrAf_FE_yD82-ts3UXA"
@@ -39,11 +38,9 @@
 
 <body>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav-container">
 
-      <!-- Logo on the left -->
       <a
         href="{{ url_for('home') }}"
         class="brand"
@@ -58,7 +55,6 @@
         <span class="brand-name">FLAREN</span>
       </a>
 
-      <!-- Desktop navigation -->
       <nav
         class="main-nav"
         aria-label="Desktop navigation"
@@ -78,7 +74,6 @@
         </a>
       </nav>
 
-      <!-- Mobile hamburger button -->
       <button
         type="button"
         class="mobile-menu-toggle"
@@ -91,7 +86,6 @@
         <span class="hamburger-line"></span>
       </button>
 
-      <!-- Mobile navigation -->
       <nav
         id="mobile-menu"
         class="mobile-menu-dropdown"
@@ -116,7 +110,6 @@
     </div>
   </header>
 
-  <!-- FLASH MESSAGES -->
   <main>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -133,7 +126,6 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
 
@@ -161,7 +153,6 @@
     </div>
   </footer>
 
-  <!-- MOBILE MENU SCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const toggle = document.querySelector(".mobile-menu-toggle");
@@ -223,7 +214,6 @@
     });
   </script>
 
-  <!-- FLAREN AI ASSISTANT: MINDPAL -->
   <script>
     window.mindpalConfig = {
       chatbotId: "flaren-design-studio-assistant-efe",
@@ -240,7 +230,6 @@
 
   <script src="https://chatbot.getmindpal.com/embed.min.js"></script>
 
-  <!-- MindPal positioning -->
   <style>
     #mindpal-widget,
     [id*="mindpal"],
