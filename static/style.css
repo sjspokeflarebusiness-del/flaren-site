@@ -3853,3 +3853,8 @@ body.planner-modal-open {
     grid-template-columns: 1fr;
   }
 }
+.budget-text {
+  color: #8a6c25;
+  font-size: 14px;
+  font-weight: 800;
+}
