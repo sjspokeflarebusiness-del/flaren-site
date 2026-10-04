@@ -74,7 +74,7 @@ FLAREN — Selected Work
 
       <p class="section-heading-text">
         Browse the examples below. Open a project to see its category,
-        description, starting price, and next step.
+        description, budget guidance, and next step.
       </p>
     </div>
 
@@ -107,16 +107,16 @@ FLAREN — Selected Work
             {{ work['desc'] }}
           </p>
 
-          <div class="work-card-bottom">
-            <strong>
-              From {{ work['price'] }}
-            </strong>
+       <div class="work-card-bottom">
+        <strong class="budget-text">
+          According to your budget
+        </strong>
 
-            <span class="text-link">
-              View project <span>→</span>
-            </span>
-          </div>
-
+       <span class="text-link">
+         View project <span>→</span>
+       </span>
+      </div>
+  
         </div>
       </a>
       {% else %}
